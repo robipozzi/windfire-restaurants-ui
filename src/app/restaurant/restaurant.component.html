@@ -1,0 +1,11 @@
+<nav class="restaurants">
+    <a class="badge" routerLink="/home">Back Home</a>
+</nav>
+<div *ngIf="restaurants.length">
+    <h2>Restaurants</h2>
+    <ul class="restaurants">
+        <li *ngFor="let restaurant of restaurants">
+            <span class="badge">{{restaurant.id}}</span> {{restaurant.name}}
+        </li>
+    </ul>
+</div>

@@ -1,3 +1,5 @@
 export const environment = {
-  production: true
+  production: true,
+  environment: 'production',
+  restaurantServiceBaseUrl: 'http://prod-url:8082'
 };
