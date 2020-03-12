@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ErrorService } from 'src/app/error/services/error.service';
+import { Restaurant } from '../restaurant';
 
 @Injectable({
   providedIn: 'root'
@@ -29,13 +30,17 @@ export class RestaurantService {
         catchError(this.errorService.handleError<string>('getRestaurants()', String())));
   }
 
-  /*getRestaurants(): Restaurant[] {
+  getRestaurantsFake(): Restaurant[] {
+    console.log('Returning a fake Restaurant list');
     const restaurants: Restaurant[] = [];
     var index = 0;
-    var restaurant1 = new Restaurant('1', 'pippo');
+    var restaurant1 = new Restaurant('1', 'Osteria del Pesce');
+    var restaurant2 = new Restaurant('2', 'Il cortile del Re');
+    var restaurant3 = new Restaurant('3', 'La Perla');
     restaurants[index++] = restaurant1;
-    console.log('Returning a fake Restaurant list');
+    restaurants[index++] = restaurant2;
+    restaurants[index++] = restaurant3;
     return restaurants;
-  }*/
+  }
   
 }

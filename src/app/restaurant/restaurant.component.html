@@ -1,11 +1,17 @@
-<nav class="restaurants">
-    <a class="badge" routerLink="/home">Back Home</a>
-</nav>
-<div *ngIf="restaurants.length">
-    <h2>Restaurants</h2>
-    <ul class="restaurants">
-        <li *ngFor="let restaurant of restaurants">
-            <span class="badge">{{restaurant.id}}</span> {{restaurant.name}}
-        </li>
-    </ul>
+<div class="container" *ngIf="restaurants.length">
+    <div class="bg-primary text-center text-white font-weight-bold">Restaurants</div>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let restaurant of restaurants">
+                <td>{{restaurant.id}}</td>
+                <td>{{restaurant.name}}</td>
+            </tr>
+        </tbody>
+    </table>
 </div>

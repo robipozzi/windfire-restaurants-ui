@@ -18,7 +18,7 @@ export class RestaurantComponent implements OnInit {
 
   getRestaurants(): void {
     this.restaurantService.getRestaurants().subscribe(obj => this.processResponse(obj));
-    //this.restaurants = this.restaurantService.getRestaurants();
+    //this.restaurants = this.restaurantService.getRestaurantsFake();
   }
 
   processResponse(obj: string): void {
