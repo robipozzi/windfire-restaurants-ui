@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Restaurant } from './restaurant';
 import { RestaurantService } from './services/restaurant.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-restaurant',
@@ -17,8 +18,11 @@ export class RestaurantComponent implements OnInit {
   }
 
   getRestaurants(): void {
-    this.restaurantService.getRestaurants().subscribe(obj => this.processResponse(obj));
-    //this.restaurants = this.restaurantService.getRestaurantsFake();
+    if (environment.mock) {
+      this.restaurants = this.restaurantService.getRestaurantsFake();
+    } else {
+      this.restaurantService.getRestaurants().subscribe(obj => this.processResponse(obj));
+    }
   }
 
   processResponse(obj: string): void {
