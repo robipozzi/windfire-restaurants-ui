@@ -1,12 +1,19 @@
 ---
 - hosts: raspberry
+  remote_user: "{{ user }}"
   become: yes
   vars:
-      ANGULAR_DIST_DIR: /Users/robertopozzi/dev/rpozzi-restaurants-ui/dist/rpozzi-restaurants-ui
-      APP_HOME_DIR: /home/pi/rpozzi-restaurants
-      APP_FILES_DIR: rpozzi-restaurants-ui
-      APACHE2_DOC_DIR: /var/www/html
+    src_dir: "{{ playbook_dir }}"
+    ANGULAR_DIST_DIR: /Users/robertopozzi/dev/windfire-restaurants-ui/dist/windfire-restaurants-ui
+    APP_HOME_DIR: "{{ remote_home_dir }}/windfire-restaurants"
+    APP_FILES_DIR: windfire-restaurants-ui
+    APACHE2_DOC_DIR: "{{ apache2_doc_dir }}"
+  vars_files:
+    - "{{ src_dir }}/conf/raspberry-config.yml"
+    - "{{ src_dir }}/conf/apache2.yml"
   tasks:
+    - debug:
+       msg: System {{ playbook_dir }}
     - name: Transfer Angular Files
       copy:
         src: "{{ ANGULAR_DIST_DIR }}"

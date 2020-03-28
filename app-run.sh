@@ -9,11 +9,10 @@ run()
     # It uses the configuration defined in one of the 2 files environment files:
     # - src/environments/environment.ts
     # - src/environments/environment-mockup.ts
-	# ************* START - FIX
-	RUN_OPTIONS="--configuration=mockup"
-	# ************* END - FIX
-    echo Running Angular application with the following command: ${cyn}ng serve $RUN_OPTIONS --open${end}
-    ng serve $RUN_OPTIONS --open
+	printSelectPlatform
+	RUN_CMD="ng serve $RUN_OPTIONS --open"
+    echo Running Angular application with the following command: ${cyn}$RUN_CMD${end}
+    $RUN_CMD
 }
 
 printSelectPlatform()
@@ -39,11 +38,5 @@ configureRunOptions()
 }
 
 ###### Main section
-if [ -z $ENV ]; then 
-	BUILD_OPTIONS=
-else
-    PLATFORM_OPTION=$1
-	configureRunOptions
-fi
 RUN_FUNCTION=run
 $RUN_FUNCTION
