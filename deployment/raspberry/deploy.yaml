@@ -1,30 +1,25 @@
----
+--- # Ansible Playbook to automate application deployment to Raspberry Pis in a consistent and repeatable way
 - hosts: raspberry
   remote_user: "{{ user }}"
   become: yes
   vars:
     src_dir: "{{ playbook_dir }}"
-    ANGULAR_DIST_DIR: /Users/robertopozzi/dev/windfire-restaurants-ui/dist/windfire-restaurants-ui
-    APP_HOME_DIR: "{{ remote_home_dir }}/windfire-restaurants"
-    APP_FILES_DIR: windfire-restaurants-ui
-    APACHE2_DOC_DIR: "{{ apache2_doc_dir }}"
+    angular_dist_dir: "{{ lookup('env', 'HOME') }}/dev/windfire-restaurants-ui/dist/windfire-restaurants-ui"
   vars_files:
     - "{{ src_dir }}/conf/raspberry-config.yml"
     - "{{ src_dir }}/conf/apache2.yml"
   tasks:
-    - debug:
-       msg: System {{ playbook_dir }}
     - name: Transfer Angular Files
       copy:
-        src: "{{ ANGULAR_DIST_DIR }}"
-        dest: "{{ APP_HOME_DIR }}"
-    - name: Clean Apache2 folder {{ APACHE2_DOC_DIR }}
+        src: "{{ angular_dist_dir }}"
+        dest: "{{ remote_app_home_dir }}"
+    - name: Clean Apache2 folder {{ apache2_doc_dir }}
       file:
-        path: "{{ APACHE2_DOC_DIR }}/"
+        path: "{{ apache2_doc_dir }}/"
         state: absent
-    - name: Copy Angular application files from {{ APP_HOME_DIR }}/{{ APP_FILES_DIR }} to Apache2 folder {{ APACHE2_DOC_DIR }}
-      shell: 'cp -r {{ APP_HOME_DIR }}/{{ APP_FILES_DIR }} {{ APACHE2_DOC_DIR }}'
-    - name: Clean folder {{ APP_HOME_DIR }}/{{ APP_FILES_DIR }}
+    - name: Copy Angular application files from {{ remote_app_home_dir }}/{{ remote_app_files_dir }} to Apache2 folder {{ apache2_doc_dir }}
+      shell: 'cp -r {{ remote_app_home_dir }}/{{ remote_app_files_dir }} {{ apache2_doc_dir }}'
+    - name: Clean folder {{ remote_app_home_dir }}/{{ remote_app_files_dir }}
       file:
-        path: "{{ APP_HOME_DIR }}/{{ APP_FILES_DIR }}/"
+        path: "{{ remote_app_home_dir }}/{{ remote_app_files_dir }}/"
         state: absent
