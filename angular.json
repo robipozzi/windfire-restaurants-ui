@@ -59,6 +59,64 @@
                   "maximumError": "10kb"
                 }
               ]
+            },
+            "raspberry": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.raspberry.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            },
+            "mockup": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.mockup.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
             }
           }
         },
@@ -70,6 +128,12 @@
           "configurations": {
             "production": {
               "browserTarget": "windfire-restaurants-ui:build:production"
+            },
+            "raspberry": {
+              "browserTarget": "windfire-restaurants-ui:build:raspberry"
+            },
+            "mockup": {
+              "browserTarget": "windfire-restaurants-ui:build:mockup"
             }
           }
         },
@@ -118,6 +182,9 @@
           "configurations": {
             "production": {
               "devServerTarget": "windfire-restaurants-ui:serve:production"
+            },
+            "mockup": {
+              "devServerTarget": "windfire-restaurants-ui:serve:mockup"
             }
           }
         }

@@ -1,0 +1,23 @@
+---
+- hosts: raspberry
+  become: yes
+  vars:
+      ANGULAR_DIST_DIR: /Users/robertopozzi/dev/rpozzi-restaurants-ui/dist/rpozzi-restaurants-ui
+      APP_HOME_DIR: /home/pi/rpozzi-restaurants
+      APP_FILES_DIR: rpozzi-restaurants-ui
+      APACHE2_DOC_DIR: /var/www/html
+  tasks:
+    - name: Transfer Angular Files
+      copy:
+        src: "{{ ANGULAR_DIST_DIR }}"
+        dest: "{{ APP_HOME_DIR }}"
+    - name: Clean Apache2 folder {{ APACHE2_DOC_DIR }}
+      file:
+        path: "{{ APACHE2_DOC_DIR }}/"
+        state: absent
+    - name: Copy Angular application files from {{ APP_HOME_DIR }}/{{ APP_FILES_DIR }} to Apache2 folder {{ APACHE2_DOC_DIR }}
+      shell: 'cp -r {{ APP_HOME_DIR }}/{{ APP_FILES_DIR }} {{ APACHE2_DOC_DIR }}'
+    - name: Clean folder {{ APP_HOME_DIR }}/{{ APP_FILES_DIR }}
+      file:
+        path: "{{ APP_HOME_DIR }}/{{ APP_FILES_DIR }}/"
+        state: absent
