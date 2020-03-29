@@ -1,4 +1,4 @@
-source ../setenv.sh
+source setenv.sh
 
 removeAngularDistFolder()
 {
@@ -21,7 +21,7 @@ deployToRaspberry()
 {
 	## Deploy Angular application to remote Raspberry box
     echo ${cyn}Deploy application to Raspberry Pi ...${end}
-    ansible-playbook raspberry/deploy.yaml 
+    ansible-playbook deployment/raspberry/deploy.yaml 
     echo ${cyn}Done${end}
     echo
 }

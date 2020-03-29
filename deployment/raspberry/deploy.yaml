@@ -4,7 +4,7 @@
   become: yes
   vars:
     src_dir: "{{ playbook_dir }}"
-    angular_dist_dir: "{{ lookup('env', 'HOME') }}/dev/windfire-restaurants-ui/dist/windfire-restaurants-ui"
+    angular_dist_dir: "{{ lookup('env', 'PWD') }}/dist/windfire-restaurants-ui"
   vars_files:
     - "{{ src_dir }}/conf/raspberry-config.yml"
     - "{{ src_dir }}/conf/apache2.yml"
