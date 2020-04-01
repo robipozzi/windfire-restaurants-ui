@@ -4,7 +4,7 @@ removeAngularDistFolder()
 {
 	## Remove Angular distribution folder
     echo ${cyn}Removing Angular dist folder $ANGULAR_DIST_DIR ...${end}
-    rm -rf ../$ANGULAR_DIST_DIR
+    rm -rf $ANGULAR_DIST_DIR
     echo ${cyn}Angular dist folder removed${end}
 }
 
