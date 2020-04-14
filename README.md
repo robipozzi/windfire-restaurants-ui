@@ -6,20 +6,23 @@ The *Windfire Restaurants UI* microservice of the application is developed using
 
 Before starting to use and test the application you also need to ensure all the dependencies for the application are installed, I provided *app-init.sh* script for your convenience, just run it and it will do it for you.
 
-## TODO
-The application uses Angular environment customization mechanism to run with different configurations, available in *src/environments* folder.
+## Run the application
+The application uses Angular environment customization mechanism to run with different configurations, defined as files (with *.ts* extension) available in *src/environments* folder.
 
-Script *app-run.sh* is provided to start the application, letting choose which environment configuration is to be applied; currently the 
+Script *app-run.sh* is provided to start the application, letting choose which environment configuration is to be applied; currently the script exposes 2 options:
 
 ![](images/app-run.png)
 
+As it can be seen in the figure above, options are the following:
+* *Mockup configuration* uses environment configuration defined in *src/environment/environment.mockup.ts*, which basically mocks the Restaurant Service, returning a fixed restaurant list. No other microservices are actually invoked;
+* *Default configuration* uses standard environment configuration defined in *src/environment/environment.ts*, which points to another microserivice endpoint, to which restaurant list retrieval is delegated.
+
 ## DevOps automation
-The scripts provided are based on Ansible technology (https://www.ansible.com/) for task automation; refer to Ansible technical 
-documentation (https://docs.ansible.com/) for detailed instructions regarding installation and setup.
+Automation is based on Ansible technology (https://www.ansible.com/); refer to Ansible technical documentation (https://docs.ansible.com/) for detailed instructions regarding installation and setup.
 
 A file, named *ansible.cfg*, is provided to set basic configurations needed to run Ansible; if you launch Ansible from the repo root directory, this file will be read and used as the source for configuration settings (unless you have set an ANSIBLE_CONFIG environment variable, which has precedence), the basic configuration you should have is something like this:
 
-![](images/app-run.png)
+![](images/ansible-config.png)
 where:
 
 * *private_key_file* points to the SSH private key used by Ansible to connect and launch tasks on the target infrastructure;
@@ -27,5 +30,13 @@ where:
 
 Change the parameters according to your environment.
 
+Finally, script *deploy.sh* is also provided for 
+
+![](images/deploy.png)
+
+As it can be seen in the figure above, the script currently exposes 2 options:
+* *xx*
+* *XX*
+
 ## References
-I wrote a more extensive article on how to use Ansible to automate various installation, configuration and application deployment tasks on Raspberry Pi, you can read it at the link here *https://bit.ly/3b13V9h*.
+I wrote a more extensive article on how to use Ansible to automate application deployment tasks on Raspberry Pi, you can read it at the link here *https://bit.ly/3b13V9h*.
