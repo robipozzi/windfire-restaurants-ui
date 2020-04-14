@@ -34,9 +34,15 @@ Finally, script *deploy.sh* is also provided for
 
 ![](images/deploy.png)
 
-As it can be seen in the figure above, the script currently exposes 2 options:
-* *xx*
-* *XX*
+As it can be seen in the figure above, the script currently exposes 2 deployment options:
+* *Raspberry - with restaurants mockup* : 
+* *Raspberry* : 
+
+As said before, the script wraps Ansible to automate deployment tasks, using the Ansible playbook *deployment/deploy.yaml*.
+
+Both Raspberry options assume Apache2 as web server target for deployment, you can refer to my other GitHub repository *https://github.com/robipozzi/windfire-raspberry.git* for instructions and code to setup Apache2 on Raspberry Pi.
+
+More deployment environment options will be added in the future.
 
 ## References
 I wrote a more extensive article on how to use Ansible to automate application deployment tasks on Raspberry Pi, you can read it at the link here *https://bit.ly/3b13V9h*.
