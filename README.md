@@ -40,9 +40,12 @@ As it can be seen in the figure above, the script currently exposes 2 deployment
 
 As said before, the script wraps Ansible to automate deployment tasks, using the Ansible playbook *deployment/deploy.yaml*.
 
-Both Raspberry options assume Apache2 as web server target for deployment, you can refer to my other GitHub repository *https://github.com/robipozzi/windfire-raspberry.git* for instructions and code to setup Apache2 on Raspberry Pi.
+Both Raspberry options assume Apache2 as web server target for deployment, you can refer to my article *https://bit.ly/3b13V9h* on Medium and to my other GitHub repository *https://github.com/robipozzi/windfire-raspberry.git* for instructions and code to setup Apache2 on Raspberry Pi.
 
 More deployment environment options will be added in the future.
 
 ## References
-I wrote a more extensive article on how to use Ansible to automate application deployment tasks on Raspberry Pi, you can read it at the link here *https://bit.ly/3b13V9h*.
+I wrote some more extensive articles on how to install and configure software on Raspberry Pi:
+* Use Ansible to automate infrastructure installation, configuration and application deployment on Raspberry Pi : *https://bit.ly/3b13V9h*;
+* Install Apache2 on Raspberry Pi : https://bit.ly/2xvuIf4
+* Secure Raspberry Pi with self signed SSL certificates : https://bit.ly/3b8ujhs
