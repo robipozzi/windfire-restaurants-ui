@@ -1,5 +1,12 @@
 source setenv.sh
 
+# ##### START - Variable section
+SCRIPT=deploy.sh
+PLATFORM_OPTION=$1
+DEPLOY_FUNCTION=
+# ##### END - Variable section
+
+# ***** START - Function section
 removeAngularDistFolder()
 {
 	## Remove Angular distribution folder
@@ -26,9 +33,20 @@ deployToRaspberry()
     echo
 }
 
+deployToAWS()
+{
+	## Deploy Angular application to AWS
+    echo ${cyn}Deploy application to AWS ...${end}
+    ansible-playbook deployment/aws/deploy.yaml 
+    echo ${cyn}Done${end}
+    echo
+}
+
 deploy()
 {
-    printSelectPlatform
+    if [ -z $PLATFORM_OPTION ]; then 
+        printSelectPlatform
+    fi
     removeAngularDistFolder
     buildAngularApp
     $DEPLOY_FUNCTION
@@ -40,8 +58,13 @@ printSelectPlatform()
 	echo ${grn}Select deployment platform : ${end}
 	echo ${grn}1. Raspberry - with restaurants mockup${end}
     echo ${grn}2. Raspberry${end}
+    echo ${grn}3. AWS - with restaurants mockup${end}
 	read PLATFORM_OPTION
-	DEPLOY_FUNCTION=
+	setDeployFunction
+}
+
+setDeployFunction()
+{
 	case $PLATFORM_OPTION in
 		1)  DEPLOY_FUNCTION="deployToRaspberry"
             BUILD_OPTIONS="--configuration=mockup"
@@ -49,12 +72,23 @@ printSelectPlatform()
         2)  DEPLOY_FUNCTION="deployToRaspberry"
             BUILD_OPTIONS="--configuration=raspberry"
 			;;
+        3)  DEPLOY_FUNCTION="deployToAWS"
+            BUILD_OPTIONS="--configuration=mockup"
+			;;
 		*) 	printf "\n${red}No valid option selected${end}\n"
 			printSelectPlatform
 			;;
 	esac
 }
+# ***** END - Function section
 
-###### Main section
+# ##############################################
+# #################### MAIN ####################
+# ##############################################
+# ************ START evaluate args ************"
+if [ "$1" != "" ]; then
+    setDeployFunction
+fi
+# ************** END evaluate args **************"
 RUN_FUNCTION=deploy
 $RUN_FUNCTION

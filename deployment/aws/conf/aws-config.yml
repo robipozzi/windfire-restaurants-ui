@@ -1,0 +1,4 @@
+user: ec2-user
+remote_home_dir: /home/ec2-user
+remote_app_home_dir: "{{ remote_home_dir }}/windfire"
+remote_app_files_dir: windfire-restaurants-ui
