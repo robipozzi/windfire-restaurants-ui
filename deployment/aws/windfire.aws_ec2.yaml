@@ -5,6 +5,3 @@ keyed_groups:
   # Create a group for each value of the Role tag
   - key: tags.Role
     separator: ''
-#compose:
-  # set the ansible_host variable to connect with the private IP address without changing the hostname
-  #ansible_host: private_ip_address
