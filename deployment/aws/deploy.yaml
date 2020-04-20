@@ -1,9 +1,4 @@
 ---
-- hosts: raspberry
-  remote_user: pi
-  tasks:
-    - name: ping
-      ping:
 - hosts: bastion
   remote_user: ec2-user
   tasks:

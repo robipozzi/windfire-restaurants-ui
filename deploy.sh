@@ -28,6 +28,7 @@ deployToRaspberry()
 {
 	## Deploy Angular application to remote Raspberry box
     echo ${cyn}Deploy application to Raspberry Pi ...${end}
+    export ANSIBLE_CONFIG=$PWD/deployment/raspberry/ansible.cfg
     ansible-playbook deployment/raspberry/deploy.yaml 
     echo ${cyn}Done${end}
     echo
@@ -37,6 +38,7 @@ deployToAWS()
 {
 	## Deploy Angular application to AWS
     echo ${cyn}Deploy application to AWS ...${end}
+    export ANSIBLE_CONFIG=$PWD/deployment/aws/ansible.cfg
     ansible-playbook deployment/aws/deploy.yaml 
     echo ${cyn}Done${end}
     echo
