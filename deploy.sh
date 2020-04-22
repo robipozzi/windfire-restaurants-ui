@@ -38,8 +38,12 @@ deployToAWS()
 {
 	## Deploy Angular application to AWS
     echo ${cyn}Deploy application to AWS ...${end}
-    export ANSIBLE_CONFIG=$PWD/deployment/aws/ansible.cfg
-    ansible-playbook deployment/aws/deploy.yaml 
+    ANSIBLE_CONFIG_FILE=ansible-aws.cfg
+    echo ${cyn}Invoking ansible-config.sh to dynamically create configuration files for Ansible ...${end}
+    deployment/aws/ansible-config.sh $ANSIBLE_CONFIG_FILE
+    export ANSIBLE_CONFIG=$PWD/deployment/aws/$ANSIBLE_CONFIG_FILE
+    echo
+    ansible-playbook -i deployment/aws/windfire.aws_ec2.yaml deployment/aws/deploy.yaml
     echo ${cyn}Done${end}
     echo
 }

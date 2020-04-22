@@ -44,3 +44,5 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+deployment/aws/ansible-aws.cfg
+deployment/aws/ansible-ssh.cfg

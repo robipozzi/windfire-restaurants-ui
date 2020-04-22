@@ -1,8 +1,27 @@
-echo "****** START --> test.sh PWD = " $PWD " - ANSIBLE_CONFIG = " $ANSIBLE_CONFIG
+source setenv.sh
+
+# ##### START - Variable section
+SCRIPT=test-aws.sh
+ANSIBLE_CONFIG_FILE=ansible-aws.cfg
+# ##### END - Variable section
+
+# ##############################################
+# #################### MAIN ####################
+# ##############################################
+echo "****** START --> $SCRIPT"
+echo "PWD = " $PWD
+echo "ANSIBLE_CONFIG = " $ANSIBLE_CONFIG
 ansible-config view
-export ANSIBLE_CONFIG=$PWD/deployment/aws/ansible.cfg
+echo
+deployment/aws/ansible-config.sh $ANSIBLE_CONFIG_FILE
+export ANSIBLE_CONFIG=$PWD/deployment/aws/$ANSIBLE_CONFIG_FILE
 echo "ANSIBLE_CONFIG set to " $ANSIBLE_CONFIG
 ansible-config view
+echo
+echo ${cyn}Getting host inventory from AWS ... ${end} 
 ansible-inventory -i deployment/aws/windfire.aws_ec2.yaml --graph
-ansible-playbook -i deployment/aws/windfire.aws_ec2.yaml deployment/aws/deploy.yaml
-echo "****** END --> test.sh PWD = " $PWD " - ANSIBLE_CONFIG = " $ANSIBLE_CONFIG
+ansible-playbook -i deployment/aws/windfire.aws_ec2.yaml deployment/aws/test.yaml
+echo
+echo "PWD = " $PWD
+echo "ANSIBLE_CONFIG = " $ANSIBLE_CONFIG
+echo "****** END --> $SCRIPT"

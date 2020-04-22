@@ -1,0 +1,11 @@
+---
+- hosts: frontend
+  remote_user: ec2-user
+  tasks:
+    - name: ping
+      ping:
+- hosts: backend
+  remote_user: ec2-user
+  tasks:
+    - name: ping
+      ping:
