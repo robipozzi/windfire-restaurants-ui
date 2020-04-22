@@ -2,8 +2,8 @@
 ANSIBLE_CONFIG_FILE=$1
 SSH_PRIVATE_KEY_FILE=aws-key.pem
 SSH_CONFIG_FILE=ansible-ssh.cfg
-BASTION_IP=52.29.176.94
-BASTION_HOSTNAME=ec2-52-29-176-94.eu-central-1.compute.amazonaws.com
+BASTION_IP=
+BASTION_HOSTNAME=
 USER=ec2-user
 HOST=10.0.*.*
 # ##### END - Variable section
@@ -29,6 +29,12 @@ EOF
 createSSHConfigFile()
 {
 	## Create SSH configuration file for Ansible
+    echo "Setting Bastion Host parameters for SSH connection, reading from Terraform state ..."${end}
+    BASTION_IP=$(terraform output -state=../windfire-restaurants-devops/aws/terraform.tfstate bastion-public_ip)
+    BASTION_HOSTNAME=$(terraform output -state=../windfire-restaurants-devops/aws/terraform.tfstate bastion-public_dns)
+    echo "Bastion Host IP   =" ${cyn}$BASTION_IP${end}
+    echo "Bastion Hostname  =" ${cyn}$BASTION_HOSTNAME${end}
+    echo
     echo ${cyn}Creating SSH configuration file for Ansible ...${end}
     cat > deployment/aws/$SSH_CONFIG_FILE << EOF
 Host $HOST

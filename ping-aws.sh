@@ -1,7 +1,7 @@
 source setenv.sh
 
 # ##### START - Variable section
-SCRIPT=test-aws.sh
+SCRIPT=ping-aws.sh
 ANSIBLE_CONFIG_FILE=ansible-aws.cfg
 # ##### END - Variable section
 
@@ -20,7 +20,7 @@ ansible-config view
 echo
 echo ${cyn}Getting host inventory from AWS ... ${end} 
 ansible-inventory -i deployment/aws/windfire.aws_ec2.yaml --graph
-ansible-playbook -i deployment/aws/windfire.aws_ec2.yaml deployment/aws/test.yaml
+ansible-playbook -i deployment/aws/windfire.aws_ec2.yaml deployment/aws/ping.yaml
 echo
 echo "PWD = " $PWD
 echo "ANSIBLE_CONFIG = " $ANSIBLE_CONFIG
