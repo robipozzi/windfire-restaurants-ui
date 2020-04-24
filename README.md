@@ -35,12 +35,24 @@ Finally, script *deploy.sh* is also provided to run deployment automation tasks.
 ![](images/deploy.png)
 
 As it can be seen in the figure above, the script currently exposes 2 deployment options:
-* *Raspberry - with restaurants mockup* : it automates deployment to a Raspberry Pi, enabling application with the mockup configuration (as defined in *src/environment/environment.mockup.ts*)
+* *Raspberry (with restaurants mockup)* : it automates deployment to a Raspberry Pi, enabling application with the mockup configuration (as defined in *src/environment/environment.mockup.ts*)
 * *Raspberry* : it automates deployment to a Raspberry Pi, enabling application with the default configuration (as defined in *src/environment/environment.ts*)
+* *AWS (with restaurants mockup)* : it automates deployment to AWS, enabling application with the mockup configuration (as defined in *src/environment/environment.mockup.ts*)
 
 As said before, the script wraps Ansible to automate deployment tasks, using the Ansible playbook *deployment/deploy.yaml*.
 
-Both Raspberry options assume Apache2 as web server target for deployment, you can refer to my article *https://bit.ly/3b13V9h* on Medium and to my other GitHub repository *https://github.com/robipozzi/windfire-raspberry.git* for instructions and code to setup Apache2 on Raspberry Pi.
+### Raspberry deployment architecture
+Both Raspberry options assume Apache2 as web server target for deployment and are based on the following High level architecture:
+
+![](images/Raspberry-architecture-single-server.png)
+
+You can refer to my article *https://bit.ly/3b13V9h* on Medium and to my other GitHub repository *https://github.com/robipozzi/windfire-raspberry.git* for instructions and code to setup Apache2 on Raspberry Pi.
+
+### AWS architecture
+AWS target deployment environment is based on the following Architecture
+
+![](images/AWS-robipozzi_windfire-restaurants.png)
+
 
 More deployment environment options will be added in the future.
 
