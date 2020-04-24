@@ -53,6 +53,10 @@ AWS target deployment environment is based on the following Architecture
 
 ![](images/AWS-robipozzi_windfire-restaurants.png)
 
+Windfire Restaurant UI microservice is deployed to an EC2 instance running Apache HTTP Server, placed in the Frontend subnet. 
+
+For security reasons, either the Frontend and Backend subnets are not directly accessible via SSH. Ansible automation script is configured to connect to the target hosts via a Bastion Host, conveniently placed in the Management subnet.
+
 
 More deployment environment options will be added in the future.
 
