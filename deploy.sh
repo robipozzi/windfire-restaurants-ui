@@ -62,9 +62,9 @@ deploy()
 printSelectPlatform()
 {
 	echo ${grn}Select deployment platform : ${end}
-	echo ${grn}1. Raspberry - with restaurants mockup${end}
-    echo ${grn}2. Raspberry${end}
-    echo ${grn}3. AWS - with restaurants mockup${end}
+	echo "${grn}1. Raspberry (with restaurants mockup)${end}"
+    echo "${grn}2. Raspberry${end}"
+    echo "${grn}3. AWS (with restaurants mockup)${end}"
 	read PLATFORM_OPTION
 	setDeployFunction
 }
