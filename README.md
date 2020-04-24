@@ -57,9 +57,6 @@ Windfire Restaurant UI microservice is deployed to an EC2 instance running Apach
 
 For security reasons, either the Frontend and Backend subnets are not directly accessible via SSH. Ansible automation script is configured to connect to the target hosts via a Bastion Host, conveniently placed in the Management subnet.
 
-
-More deployment environment options will be added in the future.
-
 ## References
 I wrote some more extensive articles on how to install and configure software on Raspberry Pi, which can be useful:
 * Use Ansible to automate infrastructure installation, configuration and application deployment on Raspberry Pi : *https://bit.ly/3b13V9h*;
