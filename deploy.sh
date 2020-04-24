@@ -43,6 +43,8 @@ deployToAWS()
     deployment/aws/ansible-config.sh $ANSIBLE_CONFIG_FILE
     export ANSIBLE_CONFIG=$PWD/deployment/aws/$ANSIBLE_CONFIG_FILE
     echo
+    BACKEND_INSTANCE_PRIVATE_IP=$(terraform output -state=../windfire-restaurants-devops/aws/terraform.tfstate backend-private_ip)
+    echo "Backend Host Private IP = " ${cyn}$BACKEND_INSTANCE_PRIVATE_IP${end}
     ansible-playbook -i deployment/aws/windfire.aws_ec2.yaml deployment/aws/deploy.yaml
     echo ${cyn}Done${end}
     echo
@@ -65,6 +67,7 @@ printSelectPlatform()
 	echo "${grn}1. Raspberry (with restaurants mockup)${end}"
     echo "${grn}2. Raspberry${end}"
     echo "${grn}3. AWS (with restaurants mockup)${end}"
+    echo "${grn}4. AWS${end}"
 	read PLATFORM_OPTION
 	setDeployFunction
 }
@@ -80,6 +83,9 @@ setDeployFunction()
 			;;
         3)  DEPLOY_FUNCTION="deployToAWS"
             BUILD_OPTIONS="--configuration=mockup"
+            ;;
+        4)  DEPLOY_FUNCTION="deployToAWS"
+            BUILD_OPTIONS=""
 			;;
 		*) 	printf "\n${red}No valid option selected${end}\n"
 			printSelectPlatform
