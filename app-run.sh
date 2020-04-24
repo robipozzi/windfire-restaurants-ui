@@ -9,6 +9,7 @@ run()
     # It uses the configuration defined in one of the 2 files environment files:
     # - src/environments/environment.ts
     # - src/environments/environment-mockup.ts
+	unset RESTAURANT_SRV_BASEURL
 	printSelectPlatform
 	RUN_CMD="ng serve $RUN_OPTIONS --open"
     echo Running Angular application with the following command: ${cyn}$RUN_CMD${end}
@@ -30,6 +31,7 @@ configureRunOptions()
 		1)  RUN_OPTIONS="--configuration=mockup"
 			;;
         2)  RUN_OPTIONS=
+			export RESTAURANT_SRV_BASEURL="http://localhost:8082"
 			;;
 		*) 	printf "\n${red}No valid option selected${end}\n"
 			printSelectPlatform

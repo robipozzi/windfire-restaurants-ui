@@ -5,12 +5,13 @@ import { catchError, tap } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ErrorService } from 'src/app/error/services/error.service';
 import { Restaurant } from '../restaurant';
+import { Environment } from 'src/environments/system-env';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RestaurantService {
-  private restaurantServiceBaseUrl = environment.restaurantServiceBaseUrl;
+  private restaurantServiceBaseUrl: string;
   private httpOptions = {
     headers: new HttpHeaders({
       'Access-Control-Allow-Origin': '*',
@@ -19,10 +20,12 @@ export class RestaurantService {
     })
   };
 
-  constructor(private http: HttpClient, private errorService: ErrorService) { }
+  constructor(private http: HttpClient, private errorService: ErrorService) { 
+    this.getEnv();
+  }
 
   getRestaurants(): Observable<string> {
-    const restaurantServiceEndpoint: string = this.restaurantServiceBaseUrl + '/restaurants';
+    var restaurantServiceEndpoint: string = this.restaurantServiceBaseUrl + '/restaurants';
     console.log('Calling Restaurant Service Endpoint @ ' + restaurantServiceEndpoint);
     return this.http.get<string>(restaurantServiceEndpoint, this.httpOptions)
       .pipe(
@@ -41,6 +44,15 @@ export class RestaurantService {
     restaurants[index++] = restaurant2;
     restaurants[index++] = restaurant3;
     return restaurants;
+  }
+
+  private getEnv() {
+    this.restaurantServiceBaseUrl = Environment.RESTAURANT_SRV_BASEURL;
+    if (this.restaurantServiceBaseUrl == '') {
+      console.log('restaurantServiceBaseUrl is void, reading from Angula environment conf');
+      this.restaurantServiceBaseUrl = environment.restaurantServiceBaseUrl
+    }
+    console.log('restaurantServiceBaseUrl =  ' + this.restaurantServiceBaseUrl);
   }
   
 }
