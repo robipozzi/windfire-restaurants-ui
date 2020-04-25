@@ -59,6 +59,13 @@ Windfire Restaurant UI microservice is deployed to an EC2 instance running Apach
 
 For security reasons, either the Frontend and Backend subnets are not directly accessible via SSH. Ansible automation script is configured to connect to the target hosts via a Bastion Host, conveniently placed in the Management subnet.
 
+In case of deployment to AWS, since the Cloud architecture is more dynamic by nature, the *deploy.sh* script delegates to [deployment/aws/ansible-config.sh](deployment/aws/ansible-config.sh) script the dynamic definition of 2 files that are used by Ansible:
+
+* *ansible-aws.cfg*, which dynamically sets Ansible configuration. An example of such a configuration is reported in the following figure
+![](images/ansible-aws.cfg.png)
+* *ansible-ssh.cfg*, which sets SSH configurations to allow Ansible to connect to Frontend and Backend instances, through the Bastion Host. An example of such a configuration is reported in the following figure
+![](images/ansible-ssh.png)
+
 ## References
 I wrote some more extensive articles on how to install and configure software on Raspberry Pi, which can be useful:
 * Use Ansible to automate infrastructure installation, configuration and application deployment on Raspberry Pi : *https://bit.ly/3b13V9h*;
