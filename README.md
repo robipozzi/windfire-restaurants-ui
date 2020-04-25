@@ -9,22 +9,22 @@ Before starting to use and test the application you also need to ensure all the 
 ## Run the application on local
 The application uses Angular environment customization mechanism to run with different configurations, defined as files (with *.ts* extension) available in *src/environments* folder.
 
-Script *app-run.sh* is provided to start the application, letting choose which environment configuration is to be applied; currently the script exposes 2 options:
+Script *app-run.sh* is provided to start the application, letting choose which environment configuration is to be applied; currently the script exposes 2 options, as it can be seen in the figure below:
 
 ![](images/app-run.png)
 
-As it can be seen in the figure above, options are the following:
+Options are the following:
 * *Mockup configuration* uses environment configuration defined in *src/environment/environment.mockup.ts*, which basically mocks the Restaurant Service, returning a fixed restaurant list. No other microservice is actually invoked;
 * *Default configuration* uses standard environment configuration, pointing to *Windfire Restaurant Backend* microservice endpoint, to which restaurant list retrieval is delegated; the endpoint is read from RESTAURANT_SRV_BASEURL environment variable or, if not found, alternatively from *src/environment/environment.ts* configuration file.
 
 ## DevOps automation
 Automation is implemented using Ansible technology (https://www.ansible.com/): refer to Ansible technical documentation (https://docs.ansible.com/) for detailed instructions regarding installation and setup.
 
-The *deploy.sh* script is provided to run deployment automation tasks. 
+The *deploy.sh* script is provided to run deployment automation tasks, as it can be seen in the figure below. 
 
 ![](images/deploy.png)
 
-As it can be seen in the figure above, the script currently exposes 4 deployment options:
+The script currently exposes 4 deployment options:
 * *Raspberry (with restaurants mockup)* : it automates *Windfire Restaurants UI* microservice deployment to a Raspberry Pi, enabling the *Mockup configuration* (as defined in *src/environment/environment.mockup.ts*)
 * *Raspberry* : it automates *Windfire Restaurants UI* microservice deployment to a Raspberry Pi, enabling the *Default configuration* (as defined in *src/environment/environment.ts*)
 * *AWS (with restaurants mockup)* : it automates *Windfire Restaurants UI* microservice deployment to AWS, enabling the *Mockup configuration* (as defined in *src/environment/environment.mockup.ts*)
@@ -47,7 +47,7 @@ where:
 
 Change the parameters according to your environment.
 
-The script wraps Ansible to automate deployment tasks, using the Ansible playbook ![](*deployment/raspberry/deploy.yaml*).
+The script wraps Ansible to automate deployment tasks, using the Ansible provided playbook [deployment/raspberry/deploy.yaml](deployment/raspberry/deploy.yaml).
 
 
 ### AWS architecture
