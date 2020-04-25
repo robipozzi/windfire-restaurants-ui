@@ -37,13 +37,13 @@ Both Raspberry options assume Apache2 as web server target for deployment and ar
 
 You can refer to my article *https://bit.ly/3b13V9h* on Medium and to my other GitHub repository *https://github.com/robipozzi/windfire-raspberry.git* for instructions and code to setup Apache2 on Raspberry Pi.
 
-A file, named **ansible.cfg**, is provided to set basic configurations needed to run Ansible: the *deploy.sh* script sets ANSIBLE_CONFIG environment variable pointing to this file; the basic configuration you should have is something like this:
+A file, named **ansible.cfg**, is provided to set basic configurations needed to run Ansible: the **deploy.sh** script sets ANSIBLE_CONFIG environment variable pointing to this file; the basic configuration you should have is something like this:
 
 ![](images/ansible-config.png)
 where:
 
-* *private_key_file* points to the SSH private key used by Ansible to connect and launch tasks on the target infrastructure;
-* *inventory* defines where Ansible will look for the inventory file, which is used by Ansible to know which servers to connect and manage.
+* *inventory* defines where Ansible will look for the inventory file, which is used by Ansible to know which servers to connect and manage;
+* *private_key_file* points to the SSH private key used by Ansible to connect and launch tasks on the target infrastructure.
 
 Change the parameters according to your environment.
 
@@ -68,6 +68,8 @@ In case of deployment to AWS, since the Cloud architecture is more dynamic by na
 * *ansible-ssh.cfg*, which sets SSH configurations to allow Ansible to connect to Frontend and Backend instances, through the Bastion Host. An example of such a configuration is reported in the following figure
 
 ![](images/ansible-ssh.png)
+
+The script wraps Ansible to automate deployment tasks, using the Ansible provided playbook [deployment/aws/deploy.yaml](deployment/aws/deploy.yaml).
 
 ## References
 I wrote some more extensive articles on how to install and configure software on Raspberry Pi, which can be useful:
