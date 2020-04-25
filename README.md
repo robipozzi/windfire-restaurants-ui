@@ -4,12 +4,12 @@ This repository holds the code for UI of my *Windfire Restaurants* management ap
 ## Before you start
 The *Windfire Restaurants UI* microservice of the application is developed using Angular technology; to test it locally, you need to install Angular on your workstation, follow the instructions at Angular website (*https://angular.io/guide/setup-local*) to setup Angular and all its prerequisites.
 
-Before starting to use and test the application you also need to ensure all the dependencies for the application are installed, I provided *app-init.sh* script for your convenience, just run it and it will do it for you.
+Before starting to use and test the application you also need to ensure all the dependencies for the application are installed, I provided **app-init.sh** script for your convenience, just run it and it will do it for you.
 
 ## Run the application on local
 The application uses Angular environment customization mechanism to run with different configurations, defined as files (with *.ts* extension) available in *src/environments* folder.
 
-Script *app-run.sh* is provided to start the application, letting choose which environment configuration is to be applied; currently the script exposes 2 options, as it can be seen in the figure below:
+Script **app-run.sh** is provided to start the application, letting choose which environment configuration is to be applied; currently the script exposes 2 options, as it can be seen in the figure below:
 
 ![](images/app-run.png)
 
@@ -20,7 +20,7 @@ Options are the following:
 ## DevOps automation
 Automation is implemented using Ansible technology (https://www.ansible.com/): refer to Ansible technical documentation (https://docs.ansible.com/) for detailed instructions regarding installation and setup.
 
-The *deploy.sh* script is provided to run deployment automation tasks, as it can be seen in the figure below. 
+The **deploy.sh** script is provided to run deployment automation tasks, as it can be seen in the figure below. 
 
 ![](images/deploy.png)
 
@@ -37,7 +37,7 @@ Both Raspberry options assume Apache2 as web server target for deployment and ar
 
 You can refer to my article *https://bit.ly/3b13V9h* on Medium and to my other GitHub repository *https://github.com/robipozzi/windfire-raspberry.git* for instructions and code to setup Apache2 on Raspberry Pi.
 
-A file, named *ansible.cfg*, is provided to set basic configurations needed to run Ansible: the *deploy.sh* script sets ANSIBLE_CONFIG environment variable pointing to this file; the basic configuration you should have is something like this:
+A file, named **ansible.cfg**, is provided to set basic configurations needed to run Ansible: the *deploy.sh* script sets ANSIBLE_CONFIG environment variable pointing to this file; the basic configuration you should have is something like this:
 
 ![](images/ansible-config.png)
 where:
@@ -59,7 +59,7 @@ Windfire Restaurant UI microservice is deployed to an EC2 instance running Apach
 
 For security reasons, either the Frontend and Backend subnets are not directly accessible via SSH. Ansible automation script is configured to connect to the target hosts via a Bastion Host, conveniently placed in the Management subnet.
 
-In case of deployment to AWS, since the Cloud architecture is more dynamic by nature, the *deploy.sh* script delegates to [deployment/aws/ansible-config.sh](deployment/aws/ansible-config.sh) script the dynamic definition of 2 files that are used by Ansible:
+In case of deployment to AWS, since the Cloud architecture is more dynamic by nature, the **deploy.sh** script delegates to [deployment/aws/ansible-config.sh](deployment/aws/ansible-config.sh) script the dynamic definition of 2 files that are used by Ansible:
 
 * *ansible-aws.cfg*, which dynamically sets Ansible configuration. An example of such a configuration is reported in the following figure
 
