@@ -31,7 +31,7 @@ configureRunOptions()
 		1)  RUN_OPTIONS="--configuration=mockup"
 			;;
         2)  RUN_OPTIONS=
-			export RESTAURANT_SRV_BASEURL="http://localhost:8082"
+			export RESTAURANT_SRV_BASEURL="http://raspberry2:8082"
 			;;
 		*) 	printf "\n${red}No valid option selected${end}\n"
 			printSelectPlatform
