@@ -4,6 +4,7 @@ source setenv.sh
 SCRIPT=deploy.sh
 PLATFORM_OPTION=$1
 DEPLOY_FUNCTION=
+BACKEND_INSTANCE_PUBLIC_DNS=
 # ##### END - Variable section
 
 # ***** START - Function section
@@ -43,8 +44,7 @@ deployToAWS()
     deployment/aws/ansible-config.sh $ANSIBLE_CONFIG_FILE
     export ANSIBLE_CONFIG=$PWD/deployment/aws/$ANSIBLE_CONFIG_FILE
     echo
-    BACKEND_INSTANCE_PRIVATE_IP=$(terraform output -state=../windfire-restaurants-devops/aws/terraform.tfstate backend-private_ip)
-    echo "Backend Host Private IP = " ${cyn}$BACKEND_INSTANCE_PRIVATE_IP${end}
+    echo "Backend Host Public DNS = " ${cyn}$BACKEND_INSTANCE_PUBLIC_DNS${end}
     ansible-playbook -i deployment/aws/windfire.aws_ec2.yaml deployment/aws/deploy.yaml
     echo ${cyn}Done${end}
     echo
@@ -66,8 +66,7 @@ printSelectPlatform()
 	echo ${grn}Select deployment platform : ${end}
 	echo "${grn}1. Raspberry (with restaurants mockup)${end}"
     echo "${grn}2. Raspberry${end}"
-    echo "${grn}3. AWS (with restaurants mockup)${end}"
-    echo "${grn}4. AWS${end}"
+    echo "${grn}3. AWS (Single Zone with publicly accessible subnets)${end}"
 	read PLATFORM_OPTION
 	setDeployFunction
 }
@@ -79,14 +78,12 @@ setDeployFunction()
             BUILD_OPTIONS="--configuration=mockup"
 			;;
         2)  DEPLOY_FUNCTION="deployToRaspberry"
-            BUILD_OPTIONS="--configuration=raspberry"
-			;;
-        3)  DEPLOY_FUNCTION="deployToAWS"
-            BUILD_OPTIONS="--configuration=mockup"
-            ;;
-        4)  DEPLOY_FUNCTION="deployToAWS"
             BUILD_OPTIONS=""
 			;;
+        3)  DEPLOY_FUNCTION="deployToAWS"
+            BUILD_OPTIONS=""
+            BACKEND_INSTANCE_PUBLIC_DNS=$(terraform output -state=../windfire-restaurants-devops/aws/SingleZonePububnets/terraform.tfstate backend-public_dns)
+            ;;
 		*) 	printf "\n${red}No valid option selected${end}\n"
 			printSelectPlatform
 			;;
