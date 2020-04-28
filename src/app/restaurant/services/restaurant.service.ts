@@ -5,7 +5,7 @@ import { catchError, tap } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ErrorService } from 'src/app/error/services/error.service';
 import { Restaurant } from '../restaurant';
-import { Environment } from 'src/environments/system-env';
+import { AppConfigService } from 'src/app/app-config.service';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +20,7 @@ export class RestaurantService {
     })
   };
 
-  constructor(private http: HttpClient, private errorService: ErrorService) { 
+  constructor(private http: HttpClient, private errorService: ErrorService, private appConfigService: AppConfigService) { 
     this.getEnv();
   }
 
@@ -47,9 +47,9 @@ export class RestaurantService {
   }
 
   private getEnv() {
-    this.restaurantServiceBaseUrl = Environment.RESTAURANT_SRV_BASEURL;
+    this.restaurantServiceBaseUrl = this.appConfigService.getConfig().restaurantServiceBaseUrl
     if (this.restaurantServiceBaseUrl == '') {
-      console.log('restaurantServiceBaseUrl is void, reading from Angula environment conf');
+      console.log('restaurantServiceBaseUrl is void, reading from Angular environment conf');
       this.restaurantServiceBaseUrl = environment.restaurantServiceBaseUrl
     }
     console.log('restaurantServiceBaseUrl =  ' + this.restaurantServiceBaseUrl);
