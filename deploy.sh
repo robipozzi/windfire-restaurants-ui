@@ -82,7 +82,7 @@ setDeployFunction()
 			;;
         3)  DEPLOY_FUNCTION="deployToAWS"
             BUILD_OPTIONS=""
-            BACKEND_INSTANCE_PUBLIC_DNS=$(terraform output -state=../windfire-restaurants-devops/aws/SingleZonePububnets/terraform.tfstate backend-public_dns)
+            BACKEND_INSTANCE_PUBLIC_DNS=$(terraform output -state=../windfire-restaurants-devops/aws/SingleZonePubSubnets/terraform.tfstate backend-public_dns)
             ;;
 		*) 	printf "\n${red}No valid option selected${end}\n"
 			printSelectPlatform
