@@ -46,3 +46,4 @@ testem.log
 Thumbs.db
 deployment/aws/ansible-aws.cfg
 deployment/aws/ansible-ssh.cfg
+src/assets/config/config-aws.json
