@@ -47,10 +47,12 @@ export class RestaurantService {
   }
 
   private getEnv() {
-    this.restaurantServiceBaseUrl = this.appConfigService.getConfig().restaurantServiceBaseUrl
-    if (this.restaurantServiceBaseUrl == '') {
-      console.log('restaurantServiceBaseUrl is void, reading from Angular environment conf');
+    if (environment.environment == 'dev' && !environment.mock) {
+      console.log('Reading configuration from environment.ts ...')
       this.restaurantServiceBaseUrl = environment.restaurantServiceBaseUrl
+    } else if (!environment.mock){
+      console.log('Reading configuration from assets/config/config.json file ...')
+      this.restaurantServiceBaseUrl = this.appConfigService.getConfig().RESTAURANT_SVC_BASEURL
     }
     console.log('restaurantServiceBaseUrl =  ' + this.restaurantServiceBaseUrl);
   }
