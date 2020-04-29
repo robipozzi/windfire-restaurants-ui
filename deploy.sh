@@ -37,14 +37,18 @@ deployToRaspberry()
 
 deployToAWS()
 {
-	## Deploy Angular application to AWS
+	##### Deploy Angular application to AWS
     echo ${cyn}Deploy application to AWS ...${end}
+    ## Dynamically create Ansible configuration files for AWS deployment
     ANSIBLE_CONFIG_FILE=ansible-aws.cfg
     echo ${cyn}Invoking ansible-config.sh to dynamically create configuration files for Ansible ...${end}
     deployment/aws/ansible-config.sh $ANSIBLE_CONFIG_FILE
     export ANSIBLE_CONFIG=$PWD/deployment/aws/$ANSIBLE_CONFIG_FILE
     echo
+    ## Dynamically create Angular configuration file for AWS deployment
     echo "Backend Host Public DNS = " ${cyn}$BACKEND_INSTANCE_PUBLIC_DNS${end}
+    deployment/aws/appconfig-generator.sh $BACKEND_INSTANCE_PUBLIC_DNS
+    ## Run Ansible playbook for AWS deployment
     ansible-playbook -i deployment/aws/windfire.aws_ec2.yaml deployment/aws/deploy.yaml
     echo ${cyn}Done${end}
     echo

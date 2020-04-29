@@ -13,6 +13,8 @@
       copy:
         src: "{{ angular_dist_dir }}"
         dest: "{{ remote_app_home_dir }}"
+    - name: Rename config-aws.json to config.json
+      command: mv {{ remote_app_home_dir }}/{{ remote_app_files_dir }}/assets/config/config-aws.json {{ remote_app_home_dir }}/{{ remote_app_files_dir }}/assets/config/config.json
     - name: Clean Httpd folder {{ httpd_doc_dir }}
       file:
         path: "{{ httpd_doc_dir }}/"
