@@ -15,7 +15,7 @@ Script **app-run.sh** is provided to start the application, letting choose which
 
 Options are the following:
 * *Mockup configuration* uses environment configuration defined in *src/environment/environment.mockup.ts*, which basically mocks the Restaurant Service, returning a fixed restaurant list. No other microservice is actually invoked;
-* *Default configuration* uses standard environment configuration, pointing to *Windfire Restaurant Backend* microservice endpoint, to which restaurant list retrieval is delegated; the endpoint is read from RESTAURANT_SRV_BASEURL environment variable or, if not found, alternatively from *src/environment/environment.ts* configuration file.
+* *Development configuration* uses standard environment configuration, pointing to *Windfire Restaurant Backend* microservice endpoint, to which restaurant list retrieval is delegated; the endpoint is read from *src/environment/environment.ts* configuration file.
 
 ## DevOps automation
 Automation is implemented using Ansible technology (https://www.ansible.com/): refer to Ansible technical documentation (https://docs.ansible.com/) for detailed instructions regarding installation and setup.
@@ -26,7 +26,7 @@ The **deploy.sh** script is provided to run deployment automation tasks, as it c
 
 The script currently exposes 3 deployment options:
 * *Raspberry (with restaurants mockup)* : it automates *Windfire Restaurants UI* microservice deployment to a Raspberry Pi, enabling the *Mockup configuration* (as defined in *src/environment/environment.mockup.ts*)
-* *Raspberry* : it automates *Windfire Restaurants UI* microservice deployment to a Raspberry Pi, enabling the *Default configuration* (as defined in *src/environment/environment.ts*)
+* *Raspberry* : it automates *Windfire Restaurants UI* microservice deployment to a Raspberry Pi; configuration parameters are read from *config-raspberry.json* file, placed in *src/assets/config* subfolder
 * *AWS (Single Zone with publicly accessible subnets)* : it automates *Windfire Restaurants UI* microservice deployment to an AWS architecture with publicly accessible Frontend and Backend subnets
 
 ### Raspberry deployment architecture

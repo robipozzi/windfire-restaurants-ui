@@ -78,10 +78,10 @@ setDeployFunction()
             BUILD_OPTIONS="--configuration=mockup"
 			;;
         2)  DEPLOY_FUNCTION="deployToRaspberry"
-            BUILD_OPTIONS=""
+            BUILD_OPTIONS="--prod"
 			;;
         3)  DEPLOY_FUNCTION="deployToAWS"
-            BUILD_OPTIONS=""
+            BUILD_OPTIONS="--prod"
             BACKEND_INSTANCE_PUBLIC_DNS=$(terraform output -state=../windfire-restaurants-devops/aws/SingleZonePubSubnets/terraform.tfstate backend-public_dns)
             ;;
 		*) 	printf "\n${red}No valid option selected${end}\n"

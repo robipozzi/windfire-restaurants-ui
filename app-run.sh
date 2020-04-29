@@ -19,7 +19,7 @@ printSelectPlatform()
 {
 	echo ${grn}Select Angular environment run option : ${end}
 	echo ${grn}1. Mockup configuration${end}
-    echo ${grn}2. Default configuration${end}
+    echo ${grn}2. Development configuration${end}
 	read PLATFORM_OPTION
 	configureRunOptions
 }

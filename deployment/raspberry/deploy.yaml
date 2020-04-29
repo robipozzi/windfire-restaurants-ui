@@ -13,6 +13,8 @@
       copy:
         src: "{{ angular_dist_dir }}"
         dest: "{{ remote_app_home_dir }}"
+    - name: Rename config-raspberry.json to config.json
+      command: mv {{ remote_app_home_dir }}/{{ remote_app_files_dir }}/assets/config/config-raspberry.json {{ remote_app_home_dir }}/{{ remote_app_files_dir }}/assets/config/config.json
     - name: Clean Apache2 folder {{ apache2_doc_dir }}
       file:
         path: "{{ apache2_doc_dir }}/"
