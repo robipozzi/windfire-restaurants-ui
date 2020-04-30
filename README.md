@@ -65,14 +65,13 @@ In case of deployment to AWS, since the Cloud architecture is totally dynamic by
 
 ![](images/ansible-aws.cfg.png)
 
-As it can be seen, the *[inventory]* section of the Ansible configuration file does not refer to any specific host inventory but just enable plugins to dynamically get the information about hosts from AWS ([Inventory Plugins](https://docs.ansible.com/ansible/latest/plugins/inventory.html#inventory-plugins) is a standard mechanism provided by Ansible to dynamically build host inventories). The **deploy.sh** script
-[deployment/aws/ansible-config.sh](deployment/aws/windfire.aws_ec2.yaml)
+As it can be seen, the *[inventory]* section of the Ansible configuration file does not refer to any specific host inventory but just enable plugins to dynamically get the information about hosts from AWS ([Inventory Plugins](https://docs.ansible.com/ansible/latest/plugins/inventory.html#inventory-plugins) is a standard mechanism provided by Ansible to dynamically build host inventories). 
 
 * **ansible-ssh.cfg**, which sets SSH configurations to allow Ansible to connect to Frontend and Backend instances, through the Bastion Host. An example of such a configuration is reported in the following figure
 
 ![](images/ansible-ssh.png)
 
-The script wraps Ansible to automate deployment tasks, using the Ansible provided playbook [deployment/aws/deploy.yaml](deployment/aws/deploy.yaml).
+The **deploy.sh** script wraps Ansible to automate deployment tasks, passing [windfire.aws_ec2.yaml](deployment/aws/windfire.aws_ec2.yaml) file as a parameter, which instructs Ansible to get Hosts IPs from the dynamic inventory, when invoking the Ansible provided playbook [deployment/aws/deploy.yaml](deployment/aws/deploy.yaml).
 
 ## References
 I wrote some more extensive articles on how to install and configure software on Raspberry Pi, which can be useful:
