@@ -65,7 +65,7 @@ In case of deployment to AWS, since the Cloud architecture is totally dynamic by
 
 ![](images/ansible-aws.cfg.png)
 
-As it can be seen, the *[inventory]* section of the Ansible configuration file does not refer to any specific host inventory but just enable plugins to dynamically get the information about hosts from AWS ([Inventory Plugins](https://docs.ansible.com/ansible/latest/plugins/inventory.html#inventory-plugins) is a standard mechanism provided by Ansible to dynamically build host inventories). 
+As it can be seen, the **[inventory]** section of the Ansible configuration file does not refer to any specific host inventory but just enable plugins to dynamically get the information about hosts from AWS ([Inventory Plugins](https://docs.ansible.com/ansible/latest/plugins/inventory.html#inventory-plugins) is a standard mechanism provided by Ansible to dynamically build host inventories). 
 
 * **ansible-ssh.cfg**, which sets SSH configurations to allow Ansible to connect to Frontend and Backend instances, through the Bastion Host. An example of such a configuration is reported in the following figure
 
