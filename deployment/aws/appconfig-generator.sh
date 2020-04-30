@@ -9,7 +9,7 @@ createAngularConfigFile()
     echo ${cyn}Dynamically create Angular configuration file ...${end}
     cat > $PWD/dist/windfire-restaurants-ui/assets/config/config-aws.json << EOF
 {
-    "RESTAURANT_SVC_BASEURL": "$RESTAURANT_SVC_BASEURL"
+    "RESTAURANT_SVC_BASEURL": "http://$RESTAURANT_SVC_BASEURL:8082"
 }
 EOF
     echo ${cyn}Done${end}
