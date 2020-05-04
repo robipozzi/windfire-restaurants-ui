@@ -59,12 +59,14 @@ Windfire Restaurant UI microservice is deployed to an EC2 instance running Apach
 For security reasons, either the Frontend and Backend subnets are not directly accessible via SSH. Ansible automation script is configured to connect to the target hosts via a Bastion Host, conveniently placed in the Management subnet.
 
 #### How deployment automation procedure works
-In case of deployment to AWS, since Cloud architecture is totally dynamic by nature, the **deploy.sh** script uses 2 other scripts to generate configurations on the fly, based on the dynamic values of the provisioned AWS architecture:
-* it delegates the dynamic definition of the configurations needed by Ansible to [deployment/aws/ansible-config.sh](deployment/aws/ansible-config.sh) script 
-* it delegates the creation of **config-aws.json** with dynamic definition of the configurations needed by Ansible to o [deployment/aws/appconfig-generator.sh](deployment/aws/appconfig-generator.sh) script
+In case of deployment to AWS, the **deploy.sh** script needs to account for the dynamic nature of Cloud architecture; it wraps Ansible to automate deployment tasks, passing [windfire.aws_ec2.yaml](deployment/aws/windfire.aws_ec2.yaml) file as a parameter, which instructs Ansible to get Host IPs from a dynamic inventory, when invoking the Ansible provided playbook [deployment/aws/deploy.yaml](deployment/aws/deploy.yaml).
 
-### *Ansible dynamic configuration*
-The [deployment/aws/ansible-config.sh](deployment/aws/ansible-config.sh) script dynamically defines, based on current AWS architecture, the following 2 files that are used by Ansible:
+The **deploy.sh** script uses 2 other scripts to generate configurations on the fly, based on the dynamic values of the provisioned AWS architecture:
+* it delegates the dynamic definition of the configurations needed by Ansible to [deployment/aws/ansible-config.sh](deployment/aws/ansible-config.sh) script 
+* it delegates the dynamic creation of **src/assets/config/config-aws.json** configuration file, used by Angular application to externalize configuration parameters, to [deployment/aws/appconfig-generator.sh](deployment/aws/appconfig-generator.sh) script
+
+#### *Ansible dynamic configuration*
+The [deployment/aws/ansible-config.sh](deployment/aws/ansible-config.sh) script dynamically defines the following 2 files that are used by Ansible:
 * **ansible-aws.cfg**, which dynamically sets Ansible configuration. An example of such a configuration is reported in the following figure
 
 ![](images/ansible-aws.cfg.png)
@@ -75,7 +77,11 @@ As it can be seen, the **[inventory]** section of the Ansible configuration file
 
 ![](images/ansible-ssh.png)
 
-The **deploy.sh** script wraps Ansible to automate deployment tasks, passing [windfire.aws_ec2.yaml](deployment/aws/windfire.aws_ec2.yaml) file as a parameter, which instructs Ansible to get Hosts IPs from the dynamic inventory, when invoking the Ansible provided playbook [deployment/aws/deploy.yaml](deployment/aws/deploy.yaml).
+#### *Angular dynamic configuration*
+The [deployment/aws/appconfig-generator.sh](deployment/aws/appconfig-generator.sh) script creates **src/assets/config/config-aws.json** on the fly, with key-value configuration items based on AWS dynamic infrastructure values, as in the example below
+
+![](images/config-aws.png)
+
 
 ## References
 I wrote some more extensive articles on how to install and configure software on Raspberry Pi, which can be useful:
