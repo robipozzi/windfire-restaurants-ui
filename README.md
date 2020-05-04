@@ -59,7 +59,13 @@ Windfire Restaurant UI microservice is deployed to an EC2 instance running Apach
 For security reasons, either the Frontend and Backend subnets are not directly accessible via SSH. Ansible automation script is configured to connect to the target hosts via a Bastion Host, conveniently placed in the Management subnet.
 
 #### How deployment automation procedure works
-In case of deployment to AWS, since the Cloud architecture is totally dynamic by nature, the **deploy.sh** script delegates to [deployment/aws/ansible-config.sh](deployment/aws/ansible-config.sh) script the dynamic definition of the following 2 files that are used by Ansible:
+In case of deployment to AWS, since the Cloud architecture is totally dynamic by nature, 
+the **deploy.sh** script uses 
+* delegates to [deployment/aws/ansible-config.sh](deployment/aws/ansible-config.sh) script the dynamic definition of the following 2 files that are used by Ansible:
+
+* [deployment/aws/appconfig-generator.sh](deployment/aws/appconfig-generator.sh)
+
+[deployment/aws/ansible-config.sh](deployment/aws/ansible-config.sh) script the dynamic definition of the following 2 files that are used by Ansible:
 
 * **ansible-aws.cfg**, which dynamically sets Ansible configuration. An example of such a configuration is reported in the following figure
 
