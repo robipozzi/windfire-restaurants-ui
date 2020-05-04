@@ -65,7 +65,7 @@ The **deploy.sh** script uses 2 other scripts to generate configurations on the 
 * it delegates the dynamic definition of the configurations needed by Ansible to [deployment/aws/ansible-config.sh](deployment/aws/ansible-config.sh) script 
 * it delegates the dynamic creation of **src/assets/config/config-aws.json** configuration file, used by Angular application to externalize configuration parameters, to [deployment/aws/appconfig-generator.sh](deployment/aws/appconfig-generator.sh) script
 
-##### *Ansible dynamic configuration*
+#### *Ansible dynamic configuration*
 The [deployment/aws/ansible-config.sh](deployment/aws/ansible-config.sh) script dynamically defines the following 2 files that are used by Ansible:
 * **ansible-aws.cfg**, which dynamically sets Ansible configuration. An example of such a configuration is reported in the following figure
 
@@ -77,7 +77,7 @@ As it can be seen, the **[inventory]** section of the Ansible configuration file
 
 ![](images/ansible-ssh.png)
 
-##### *Angular dynamic configuration*
+#### *Angular dynamic configuration*
 The [deployment/aws/appconfig-generator.sh](deployment/aws/appconfig-generator.sh) script creates **src/assets/config/config-aws.json** on the fly, with key-value configuration items based on AWS dynamic infrastructure values, as in the example below
 
 ![](images/config-aws.png)
