@@ -46,6 +46,7 @@ deployToAWS()
     export ANSIBLE_CONFIG=$PWD/deployment/aws/$ANSIBLE_CONFIG_FILE
     echo
     ## Dynamically create Angular configuration file for AWS deployment
+    echo ${cyn}Invoking appconfig-generator.sh to dynamically create Angular configuration file ...${end}
     echo "Backend Host Public DNS = " ${cyn}$BACKEND_INSTANCE_PUBLIC_DNS${end}
     deployment/aws/appconfig-generator.sh $BACKEND_INSTANCE_PUBLIC_DNS
     ## Run Ansible playbook for AWS deployment
