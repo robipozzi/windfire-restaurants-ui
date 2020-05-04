@@ -63,7 +63,8 @@ In case of deployment to AWS, since Cloud architecture is totally dynamic by nat
 * it delegates the dynamic definition of the configurations needed by Ansible to [deployment/aws/ansible-config.sh](deployment/aws/ansible-config.sh) script 
 * it delegates the creation of **config-aws.json** with dynamic definition of the configurations needed by Ansible to o [deployment/aws/appconfig-generator.sh](deployment/aws/appconfig-generator.sh) script
 
-1. The [deployment/aws/ansible-config.sh](deployment/aws/ansible-config.sh) script dynamically defines, based on current AWS architecture, the following 2 files that are used by Ansible:
+### *Ansible dynamic configuration*
+The [deployment/aws/ansible-config.sh](deployment/aws/ansible-config.sh) script dynamically defines, based on current AWS architecture, the following 2 files that are used by Ansible:
 * **ansible-aws.cfg**, which dynamically sets Ansible configuration. An example of such a configuration is reported in the following figure
 
 ![](images/ansible-aws.cfg.png)
