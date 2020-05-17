@@ -27,8 +27,8 @@ The **deploy.sh** script is provided to run deployment automation tasks, as it c
 The script currently exposes 4 deployment options:
 * *Raspberry (with restaurants mockup)* : it automates *Windfire Restaurants UI* microservice deployment to a Raspberry Pi, enabling the *Mockup configuration* (as defined in *src/environment/environment.mockup.ts*)
 * *Raspberry* : it automates *Windfire Restaurants UI* microservice deployment to a Raspberry Pi; configuration parameters are read from *config-raspberry.json* file, placed in *src/assets/config* subfolder
-* *AWS - Single Zone : it automates *Windfire Restaurants UI* microservice deployment to an AWS architecture with 1 publicly accessible Frontend and 1 publicly accessible Backend subnet in a single availability zone
-* *AWS - Multi Zone : it automates *Windfire Restaurants UI* microservice deployment to an AWS architecture with Frontend and Backend subnets in a variable number of availability zones to create a Fault Tolerant architecture
+* *AWS - Single Zone* : it automates *Windfire Restaurants UI* microservice deployment to an AWS architecture with 1 publicly accessible Frontend and 1 publicly accessible Backend subnet in a single availability zone
+* *AWS - Multi Zone* : it automates *Windfire Restaurants UI* microservice deployment to an AWS architecture with Frontend and Backend subnets in a variable number of availability zones to create a Fault Tolerant architecture
 
 ### Raspberry deployment architecture
 Both Raspberry options assume Apache2 as web server target for deployment and are based on the following High level architecture:
