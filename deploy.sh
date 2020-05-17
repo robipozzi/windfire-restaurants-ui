@@ -39,8 +39,12 @@ deployToRaspberry()
 
 deployToAWS()
 {
-    printInsertAWS_KEY
-    printInsertAWS_SECRET
+    if [ "$AWS_ACCESS_KEY" == "" ]; then
+        printInsertAWS_KEY
+    fi
+    if [ "$AWS_SECRET_KEY" == "" ]; then
+        printInsertAWS_SECRET
+    fi
     export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY
     export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_KEY
 	##### Deploy Angular application to AWS
