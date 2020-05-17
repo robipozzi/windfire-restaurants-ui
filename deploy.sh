@@ -3,6 +3,8 @@ source setenv.sh
 # ##### START - Variable section
 SCRIPT=deploy.sh
 PLATFORM_OPTION=$1
+AWS_ACCESS_KEY=$2
+AWS_SECRET_KEY=$3
 DEPLOY_FUNCTION=
 BACKEND_INSTANCE_PUBLIC_DNS=
 # ##### END - Variable section
@@ -37,12 +39,16 @@ deployToRaspberry()
 
 deployToAWS()
 {
+    printInsertAWS_KEY
+    printInsertAWS_SECRET
+    export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY
+    export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_KEY
 	##### Deploy Angular application to AWS
     echo ${cyn}Deploy application to AWS ...${end}
     ## Dynamically create Ansible configuration files for AWS deployment
     ANSIBLE_CONFIG_FILE=ansible-aws.cfg
     echo ${cyn}Invoking ansible-config.sh to dynamically create configuration files for Ansible ...${end}
-    deployment/aws/ansible-config.sh $ANSIBLE_CONFIG_FILE
+    deployment/aws/ansible-config.sh $ANSIBLE_CONFIG_FILE $PLATFORM_OPTION
     export ANSIBLE_CONFIG=$PWD/deployment/aws/$ANSIBLE_CONFIG_FILE
     echo
     ## Dynamically create Angular configuration file for AWS deployment
@@ -64,6 +70,18 @@ deploy()
     buildAngularApp
     $DEPLOY_FUNCTION
 	removeAngularDistFolder
+}
+
+printInsertAWS_KEY()
+{
+	echo ${grn}Insert AWS Key : ${end}
+	read AWS_ACCESS_KEY
+}
+
+printInsertAWS_SECRET()
+{
+	echo ${grn}Insert AWS Secret : ${end}
+	read AWS_SECRET_KEY
 }
 
 printSelectPlatform()
