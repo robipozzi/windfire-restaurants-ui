@@ -71,7 +71,8 @@ printSelectPlatform()
 	echo ${grn}Select deployment platform : ${end}
 	echo "${grn}1. Raspberry (with restaurants mockup)${end}"
     echo "${grn}2. Raspberry${end}"
-    echo "${grn}3. AWS (Single Zone with publicly accessible subnets)${end}"
+    echo "${grn}3. AWS - Single Zone${end}"
+    echo "${grn}4. AWS - Multi Zone${end}"
 	read PLATFORM_OPTION
 	setDeployFunction
 }
@@ -87,7 +88,11 @@ setDeployFunction()
 			;;
         3)  DEPLOY_FUNCTION="deployToAWS"
             BUILD_OPTIONS="--prod"
-            BACKEND_INSTANCE_PUBLIC_DNS=$(terraform output -state=../windfire-restaurants-devops/aws/SingleZonePubSubnets/terraform.tfstate backend-public_dns)
+            BACKEND_INSTANCE_PUBLIC_DNS=$(terraform output -state=../windfire-restaurants-devops/aws/SingleZone/terraform.tfstate backend-public_dns)
+            ;;
+        4)  DEPLOY_FUNCTION="deployToAWS"
+            BUILD_OPTIONS="--prod"
+            BACKEND_INSTANCE_PUBLIC_DNS=$(terraform output -state=../windfire-restaurants-devops/aws/MultiZone/terraform.tfstate alb-public_dns)
             ;;
 		*) 	printf "\n${red}No valid option selected${end}\n"
 			printSelectPlatform
