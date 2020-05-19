@@ -17,6 +17,7 @@ createAnsibleConfigFile()
     cat > deployment/aws/$ANSIBLE_CONFIG_FILE << EOF
 [defaults]
 private_key_file = $HOME/.ssh/$SSH_PRIVATE_KEY_FILE
+host_key_checking = False
 [inventory]
 enable_plugins = auto, yaml, ini
 [ssh_connection]
