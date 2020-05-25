@@ -14,4 +14,5 @@ ANGULAR_DIST_DIR=dist/
 DOCKER_IMAGE_NAME=windfire-restaurants-ui
 DOCKER_IMAGE_VERSION=1.0
 DOCKER_CONTAINER_NAME=windfire-restaurants-ui
+DOCKER_HUB_ID=robipozzi
 ###### Variable section - END
