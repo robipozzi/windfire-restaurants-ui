@@ -15,4 +15,5 @@ DOCKER_IMAGE_NAME=windfire-restaurants-ui
 DOCKER_IMAGE_VERSION=1.0
 DOCKER_CONTAINER_NAME=windfire-restaurants-ui
 DOCKER_HUB_ID=robipozzi
+OPENSHIFT_IMAGE_REGISTRY=default-route-openshift-image-registry.robipozzi-rhocp-588309-3c76f4d12b7fe02f9cab56e64bec3e29-0000.eu-de.containers.appdomain.cloud
 ###### Variable section - END
