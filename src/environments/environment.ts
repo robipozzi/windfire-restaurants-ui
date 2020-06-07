@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   environment: 'dev',
   mock: false,
-  restaurantServiceBaseUrl: 'http://localhost:8082'
+  restaurantServiceBaseUrl: 'http://localhost:8081'
 };
 
 /*
