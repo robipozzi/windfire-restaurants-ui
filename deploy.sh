@@ -22,6 +22,7 @@ buildAngularApp()
 {
 	## Build Angular app for appropriate environment
     echo ${cyn}Building Angular app with the following: ng build $BUILD_OPTIONS ...${end}
+    ./app-init.sh
     ng build $BUILD_OPTIONS
     echo ${cyn}Angular app built${end}
     echo
