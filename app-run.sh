@@ -8,7 +8,7 @@ run()
     # The following command launches Angular application in the appropriate environment
     # It uses the configuration defined in one of the 2 files environment files:
     # - src/environments/environment.ts
-    # - src/environments/environment-mockup.ts
+    # - src/environments/environment.mockup.ts
 	printSelectPlatform
 	RUN_CMD="ng serve $RUN_OPTIONS --open"
     echo Running Angular application with the following command: ${cyn}$RUN_CMD${end}
