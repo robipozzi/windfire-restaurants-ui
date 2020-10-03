@@ -1,8 +1,0 @@
-/usr/libexec/s2i/assemble
-echo **************************
-echo **************************
-ls -la ./
-cd ./
-ng build $BUILD_OPTIONS
-echo **************************
-echo **************************
