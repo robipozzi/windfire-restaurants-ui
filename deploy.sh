@@ -66,6 +66,15 @@ deployToAWS()
     echo
 }
 
+deployToOpenShift()
+{
+	## Deploy Windfire Restaurants UI component to Red Hat OpenShift
+    echo ${cyn}Deploy Windfire Restaurants UI component to Red Hat OpenShift ...${end}
+    deployment/openshift/deploy.sh
+    echo ${cyn}Done${end}
+    echo
+}
+
 deploy()
 {
     if [ -z $PLATFORM_OPTION ]; then 
@@ -96,6 +105,7 @@ printSelectPlatform()
     echo "${grn}2. Raspberry${end}"
     echo "${grn}3. AWS - Single Zone${end}"
     echo "${grn}4. AWS - Multi Zone${end}"
+    echo "${grn}5. OpenShift${end}"
 	read PLATFORM_OPTION
 	setDeployFunction
 }
@@ -116,6 +126,9 @@ setDeployFunction()
         4)  DEPLOY_FUNCTION="deployToAWS"
             BUILD_OPTIONS="--prod"
             BACKEND_INSTANCE_PUBLIC_DNS=$(terraform output -state=../windfire-restaurants-devops/aws/MultiZone/terraform.tfstate alb-public_dns)
+            ;;
+        5)  DEPLOY_FUNCTION="deployToOpenShift"
+            BUILD_OPTIONS="--prod"
             ;;
 		*) 	printf "\n${red}No valid option selected${end}\n"
 			printSelectPlatform
