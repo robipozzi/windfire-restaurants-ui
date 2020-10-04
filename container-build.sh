@@ -15,7 +15,7 @@ echo ${cyn}Container image built${end}
 echo
 echo ${cyn}Pushing $CONTAINER_IMAGE_NAME:$CONTAINER_IMAGE_VERSION image to Docker Hub...${end}
 docker tag $CONTAINER_IMAGE_NAME:$CONTAINER_IMAGE_VERSION $DOCKER_HUB_ID/$CONTAINER_IMAGE_NAME:$CONTAINER_IMAGE_VERSION
-docker push docker.io/$DOCKER_HUB_ID/$CONTAINER_IMAGE_NAME:$CONTAINER_IMAGE_VERSION
+docker push $DOCKER_HUB_ID/$CONTAINER_IMAGE_NAME:$CONTAINER_IMAGE_VERSION
 echo ${cyn}Container image pushed to Docker Hub${end}
 echo
 rm -rf $ANGULAR_DIST_DIR
