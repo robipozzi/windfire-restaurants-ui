@@ -1,4 +1,5 @@
 FROM nginx:1.15.5
+LABEL author="Roberto Pozzi"
 RUN chgrp -R 0 /var/log/nginx /var/run /var/cache && \
     chmod -R g=u /var/log/nginx /var/run /var/cache
 # OpenShift - users are not allowed to listen on priviliged ports
