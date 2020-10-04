@@ -11,9 +11,9 @@ coffee3="${coffee} ${coffee} ${coffee}"
 ##### Terminal Colors - END
 ###### Variable section - START
 ANGULAR_DIST_DIR=dist/
-DOCKER_IMAGE_NAME=windfire-restaurants-ui
-DOCKER_IMAGE_VERSION=1.0
-DOCKER_CONTAINER_NAME=windfire-restaurants-ui
+CONTAINER_IMAGE_NAME=windfire-restaurants-ui
+CONTAINER_IMAGE_VERSION=1.0
+CONTAINER_CONTAINER_NAME=windfire-restaurants-ui
 DOCKER_HUB_ID=robipozzi
 OPENSHIFT_IMAGE_REGISTRY=default-route-openshift-image-registry.robipozzi-rhocp-588309-3c76f4d12b7fe02f9cab56e64bec3e29-0000.eu-de.containers.appdomain.cloud
 OPENSHIFT_PROJECT=windfire

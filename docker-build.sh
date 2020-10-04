@@ -5,17 +5,17 @@ echo ${cyn}Building Angular app ...${end}
 ng build --prod
 echo ${cyn}Angular app built${end}
 echo
-echo ${cyn}Removing Docker image ...${end}
-docker rmi -f $DOCKER_IMAGE_NAME:$DOCKER_IMAGE_VERSION
-echo ${cyn}Docker image removed${end}
+echo ${cyn}Removing $CONTAINER_IMAGE_NAME:$CONTAINER_IMAGE_VERSION image ...${end}
+docker rmi -f $CONTAINER_IMAGE_NAME:$CONTAINER_IMAGE_VERSION
+echo ${cyn}Container image removed${end}
 echo
-echo ${cyn}Building Docker image ...${end}
-docker build -t $DOCKER_IMAGE_NAME:$DOCKER_IMAGE_VERSION .
-echo ${cyn}Docker image built${end}
+echo ${cyn}Building $CONTAINER_IMAGE_NAME:$CONTAINER_IMAGE_VERSION image ...${end}
+docker build -t $CONTAINER_IMAGE_NAME:$CONTAINER_IMAGE_VERSION .
+echo ${cyn}Container image built${end}
 echo
-echo ${cyn}Pushing Docker image to Docker Hub...${end}
-docker tag $DOCKER_IMAGE_NAME:$DOCKER_IMAGE_VERSION $DOCKER_HUB_ID/$DOCKER_IMAGE_NAME:$DOCKER_IMAGE_VERSION
-docker push $DOCKER_HUB_ID/$DOCKER_IMAGE_NAME:$DOCKER_IMAGE_VERSION
-echo ${cyn}Docker image pushed to Docker Hub${end}
+echo ${cyn}Pushing $CONTAINER_IMAGE_NAME:$CONTAINER_IMAGE_VERSION image to Docker Hub...${end}
+docker tag $CONTAINER_IMAGE_NAME:$CONTAINER_IMAGE_VERSION $DOCKER_HUB_ID/$CONTAINER_IMAGE_NAME:$CONTAINER_IMAGE_VERSION
+docker push docker.io/$DOCKER_HUB_ID/$CONTAINER_IMAGE_NAME:$CONTAINER_IMAGE_VERSION
+echo ${cyn}Container image pushed to Docker Hub${end}
 echo
 rm -rf $ANGULAR_DIST_DIR

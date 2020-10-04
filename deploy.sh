@@ -68,6 +68,14 @@ deployToAWS()
 
 deployToOpenShift()
 {
+    ## Build container image for Windfire Restaurants UI component
+    echo ${cyn}Build container image for Windfire Restaurants UI component ...${end}
+    deployment/openshift/build.sh
+    echo ${cyn}Done${end}
+    ## Push container image to container registry
+    echo ${cyn}Push container image to container registry ...${end}
+    deployment/openshift/push.sh
+    echo ${cyn}Done${end}
 	## Deploy Windfire Restaurants UI component to Red Hat OpenShift
     echo ${cyn}Deploy Windfire Restaurants UI component to Red Hat OpenShift ...${end}
     deployment/openshift/deploy.sh
