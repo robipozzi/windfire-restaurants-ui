@@ -29,12 +29,26 @@ objects:
           deploymentconfig: windfire-restaurants-ui
       spec:
         containers:
-        - image: docker.io/robipozzi/windfire-restaurants-ui:1.0
-          name: windfire-restaurants-ui
+        - name: windfire-restaurants-ui
+          image: docker.io/robipozzi/windfire-restaurants-ui:1.0
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8080
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8080
+          resources:
+            limits:
+              cpu: 200m
+              memory: 512Mi
+            requests:
+              cpu: 200m
+              memory: 512Mi
           ports:
           - containerPort: 8080
             protocol: TCP
-          resources: {}
     test: false
     triggers:
     - type: ConfigChange

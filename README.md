@@ -83,6 +83,20 @@ The [deployment/aws/appconfig-generator.sh](deployment/aws/appconfig-generator.s
 
 ![](images/config-aws.png)
 
+### OpenShift architecture
+In case of deployment to OpenShift, **deploy.sh** delegates to [deployment/openshift/deploy.sh](deployment/openshift/deploy.sh) script, which then runs an **oc new-app** command using [deployment/openshift/windfire-restaurants-backend-template.yaml](deployment/openshift/windfire-restaurants-backend-template.yaml) OpenShift Template; the template defines and creates all the following objects:
+
+* *ImageStream* that references the container image in OpenShift Internal Registry
+* *BuildConfig* of type Git that uses *nodejs:10-SCL* Source-to-Build image to build from source code
+* *DeploymentConfig* that defines how the application is deployed to OpenShift cluster
+* *Service* of type ClusterIP that exposes required ports and allows to interact with the running pods from within the OpenShift cluster
+* *Route* that exposes the Service outside the OpenShift cluster
+
+#### Jenkins pipeline
+A BuildConfig definition of type JenkinsPipeline is also available at [deployment/openshift/buildconfig.yaml](deployment/openshift/buildconfig.yaml) to allow using Jenkins to automate build and deployment to OpenShift; the BuildConfig then delegates the build and deployment steps to [Jenkinsfile](Jenkinsfile)
+
+[TODO]
+
 ## References
 I wrote some more extensive articles on how to install and configure software on Raspberry Pi, which can be useful:
 * Use Ansible to automate infrastructure installation, configuration and application deployment on Raspberry Pi : *https://bit.ly/3b13V9h*;
