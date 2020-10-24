@@ -10,6 +10,8 @@ import { RestaurantComponent } from './restaurant/restaurant.component';
 import { ErrorComponent } from './error/error.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AppConfigService } from './app-config.service';
+// Import the module for Auth0 integration from the SDK
+import { AuthModule } from '@auth0/auth0-angular';
 
 const appInitializerFn = (appConfig: AppConfigService) => {
   return () => {
@@ -30,7 +32,12 @@ const appInitializerFn = (appConfig: AppConfigService) => {
   imports: [
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    // Import the module for Auth0 integration into the application, with configuration
+    AuthModule.forRoot({
+      domain: 'robipozzi.eu.auth0.com',
+      clientId: 'Gh3X311uWdYBG0xmUcmzB8vsPito52iw'
+    }),
   ],
   providers: [
     AppConfigService,
