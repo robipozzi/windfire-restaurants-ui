@@ -1,0 +1,14 @@
+kind: "BuildConfig"
+apiVersion: "build.openshift.io/v1"
+metadata:
+  name: "windfire-restaurants-ui-pipeline"
+spec:
+  source:
+    #contextDir: deployment/openshift
+    git:
+      uri: "https://github.com/robipozzi/windfire-restaurants-ui"
+      ref: "master"
+  strategy:
+    jenkinsPipelineStrategy:
+      jenkinsfilePath: Jenkinsfile
+    type: JenkinsPipeline
