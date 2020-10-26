@@ -12,6 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppConfigService } from './app-config.service';
 // Import the module for Auth0 integration from the SDK
 import { AuthModule } from '@auth0/auth0-angular';
+import { LoginButtonComponent } from './components/login-button/login-button.component';
 
 const appInitializerFn = (appConfig: AppConfigService) => {
   return () => {
@@ -27,7 +28,8 @@ const appInitializerFn = (appConfig: AppConfigService) => {
     FooterComponent,
     LayoutComponent,
     RestaurantComponent,
-    ErrorComponent
+    ErrorComponent,
+    LoginButtonComponent
   ],
   imports: [
     BrowserModule,
@@ -35,9 +37,9 @@ const appInitializerFn = (appConfig: AppConfigService) => {
     AppRoutingModule,
     // Import the module for Auth0 integration into the application, with configuration
     AuthModule.forRoot({
-      domain: 'robipozzi.eu.auth0.com',
-      clientId: 'Gh3X311uWdYBG0xmUcmzB8vsPito52iw'
-    }),
+      "domain": "robipozzi.eu.auth0.com",
+      "clientId": "Gh3X311uWdYBG0xmUcmzB8vsPito52iw"
+    })
   ],
   providers: [
     AppConfigService,

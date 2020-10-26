@@ -3,4 +3,5 @@ export const environment = {
   environment: 'prod',
   mock: false,
   restaurantServiceBaseUrl: ''
+
 };
