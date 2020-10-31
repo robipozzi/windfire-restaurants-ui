@@ -1,9 +1,13 @@
 export class Restaurant {
-  id: string;
+  _id: string;
   name: string;
+  restaurant_id: string;
+  city: string;
   
-  constructor(private _id: string, private _name: string) { 
-    this.id = _id,
-    this.name = _name
+  constructor(private id: string, private _name: string, private _restaurant_id: string, private _city: string) { 
+    this._id = id,
+    this.name = _name,
+    this.restaurant_id = _restaurant_id,
+    this.city = _city;
   }
 }

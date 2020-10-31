@@ -5,12 +5,14 @@
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Name</th>
+                <th scope="col">City</th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let restaurant of restaurants">
                 <td>{{restaurant.id}}</td>
                 <td>{{restaurant.name}}</td>
+                <td>{{restaurant.city}}</td>
             </tr>
         </tbody>
     </table>
