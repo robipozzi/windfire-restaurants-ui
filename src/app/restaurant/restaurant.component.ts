@@ -36,8 +36,7 @@ export class RestaurantComponent implements OnInit {
     restaurantObjArray.forEach(response => {
       console.log("######## restaurant.processResponse() - response = ");
       console.log(response);
-      var restaurant: Restaurant;
-      restaurant = new Restaurant(response._id, response.restaurant_id, response.name, (response.borough || response.city), response.address.street, response.address.zipcode, response.cuisine);
+      const restaurant: Restaurant = new Restaurant(response._id, response.restaurant_id, response.name, (response.borough || response.city), response.address.street, response.address.zipcode, response.cuisine);
       this.restaurants[index++] = restaurant;
     });
   }
