@@ -1,7 +1,7 @@
 <div class="container">
     <div class="jumbotron">
         <div [hidden]="submitted">
-            <h1>Restaurant Form</h1>
+            <h1>Add New Restaurant</h1>
             <form (ngSubmit)="add()" #restaurantForm="ngForm">
                 <div class="form-group">
                     <label for="name">Name</label>
@@ -33,7 +33,7 @@
                     <input type="text" class="form-control" id="cuisine" [(ngModel)]="model.cuisine" name="cuisine">
                 </div>
                 <button type="submit" class="btn btn-success" [disabled]="!restaurantForm.form.valid">Submit</button>
-                <button type="button" class="btn btn-default" (click)="reset(); restaurantForm.reset()">Reset</button>
+                <button type="button" class="btn btn-success" (click)="reset(); restaurantForm.reset()">Reset</button>
             </form>
         </div>
         <div [hidden]="!submitted">
