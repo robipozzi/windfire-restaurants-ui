@@ -37,10 +37,9 @@ export class RestaurantService {
     console.log('Returning a fake Restaurant list');
     const restaurants: Restaurant[] = [];
     var index = 0;
-    //var restaurant1 = { _id : 1, name : "Hostaria Vecchio Portico", restaurant_id : 1, city: "Arona", address : {street : "Via xx, 28", zipcode : 20981. coord:{15.99988787,45.876543}}, cuisine: "Italian"};
-    var restaurant1 = new Restaurant('1', 'Osteria del Pesce', '1', 'Arona');
-    var restaurant2 = new Restaurant('2', 'Il cortile del Re', '2', 'Gallarate');
-    var restaurant3 = new Restaurant('3', 'La Perla', '3', 'Varese');
+    var restaurant1 = new Restaurant('1', '1', 'Taverna del Pittore', 'Arona', 'Piazza del Popolo 39', '28041', 'Pesce');
+    var restaurant2 = new Restaurant('2', '2', 'La Corte del Re', 'Gallarate', 'Via Manzoni 1', '21013', 'Italian');
+    var restaurant3 = new Restaurant('3', '3', 'La Perla', 'Varese', 'Via Carrobbio 19', '21100', 'Pesce');
     restaurants[index++] = restaurant1;
     restaurants[index++] = restaurant2;
     restaurants[index++] = restaurant3;
