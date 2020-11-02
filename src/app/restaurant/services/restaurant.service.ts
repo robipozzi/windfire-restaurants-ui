@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ErrorService } from 'src/app/error/services/error.service';
-import { Restaurant } from '../restaurant';
+import { Restaurant } from '../model/restaurant';
 import { AppConfigService } from 'src/app/app-config.service';
 
 @Injectable({
@@ -31,6 +31,13 @@ export class RestaurantService {
       .pipe(
         tap(_ => console.log('Endpoint ' + restaurantServiceEndpoint + ' called, returning ...')),
         catchError(this.errorService.handleError<string>('getRestaurants()', String())));
+  }
+
+  addRestaurant(restaurant: Restaurant): void {
+    var restaurantServiceEndpoint: string = this.restaurantServiceBaseUrl + '/restaurants';
+    console.log('ADD Restaurant - Calling Restaurant Service Endpoint @ ' + restaurantServiceEndpoint);
+    console.log('Adding new Restaurant');
+    console.log(restaurant);
   }
 
   getRestaurantsFake(): Restaurant[] {

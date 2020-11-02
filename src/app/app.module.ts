@@ -7,9 +7,11 @@ import { FooterComponent } from './footer/footer.component';
 import { LayoutComponent } from './layout/layout.component';
 import { AppRoutingModule } from './app-routing.module';
 import { RestaurantComponent } from './restaurant/restaurant.component';
+import { RestaurantAddComponent } from './restaurant/add/restaurant-add.component';
 import { ErrorComponent } from './error/error.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AppConfigService } from './app-config.service';
+import { FormsModule } from '@angular/forms';
 
 const appInitializerFn = (appConfig: AppConfigService) => {
   return () => {
@@ -25,12 +27,14 @@ const appInitializerFn = (appConfig: AppConfigService) => {
     FooterComponent,
     LayoutComponent,
     RestaurantComponent,
+    RestaurantAddComponent,
     ErrorComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [
     AppConfigService,

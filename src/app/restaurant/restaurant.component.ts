@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Restaurant } from './restaurant';
+import { Restaurant } from './model/restaurant';
 import { RestaurantService } from './services/restaurant.service';
 import { environment } from 'src/environments/environment';
 
@@ -15,6 +15,12 @@ export class RestaurantComponent implements OnInit {
 
   ngOnInit() {
     this.getRestaurants();
+  }
+
+  add = false;
+
+  addNewRestaurant(): void {
+    this.add = true;
   }
 
   getRestaurants(): void {
