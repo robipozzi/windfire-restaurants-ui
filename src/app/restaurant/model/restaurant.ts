@@ -7,7 +7,7 @@ export class Restaurant {
   zipcode: string;
   cuisine: string;
   
-  constructor(private _id: string, private _restaurant_id: string, private _name: string, private _city: string, private _street: string, private _zipcode: string, private _cuisine: string) { 
+  constructor( _id: string,  _restaurant_id: string,  _name: string,  _city: string,  _street: string,  _zipcode: string,  _cuisine: string) { 
     this.id = _id,
     this.restaurant_id = _restaurant_id,
     this.name = _name,

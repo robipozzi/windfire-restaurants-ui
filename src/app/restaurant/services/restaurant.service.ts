@@ -12,6 +12,7 @@ import { AppConfigService } from 'src/app/app-config.service';
 })
 export class RestaurantService {
   private restaurantServiceBaseUrl: string;
+  private restaurantServiceEndpoint: string;
   private httpOptions = {
     headers: new HttpHeaders({
       'Access-Control-Allow-Origin': '*',
@@ -21,23 +22,23 @@ export class RestaurantService {
   };
 
   constructor(private http: HttpClient, private errorService: ErrorService, private appConfigService: AppConfigService) { 
-    this.getEnv();
+    this.setupEnv();
   }
 
   getRestaurants(): Observable<string> {
-    var restaurantServiceEndpoint: string = this.restaurantServiceBaseUrl + '/restaurants';
-    console.log('Calling Restaurant Service Endpoint @ ' + restaurantServiceEndpoint);
-    return this.http.get<string>(restaurantServiceEndpoint, this.httpOptions)
+    console.log('getRestaurants - Calling Restaurant Service Endpoint @ ' + this.restaurantServiceEndpoint);
+    return this.http.get<string>(this.restaurantServiceEndpoint, this.httpOptions)
       .pipe(
-        tap(_ => console.log('Endpoint ' + restaurantServiceEndpoint + ' called, returning ...')),
+        tap(_ => console.log('Endpoint ' + this.restaurantServiceEndpoint + ' called, returning ...')),
         catchError(this.errorService.handleError<string>('getRestaurants()', String())));
   }
 
-  addRestaurant(restaurant: Restaurant): void {
-    var restaurantServiceEndpoint: string = this.restaurantServiceBaseUrl + '/restaurants';
-    console.log('ADD Restaurant - Calling Restaurant Service Endpoint @ ' + restaurantServiceEndpoint);
-    console.log('Adding new Restaurant');
-    console.log(restaurant);
+  addRestaurant(restaurant: Restaurant): Observable<Restaurant> {
+    console.log('addRestaurant - Calling Restaurant Service Endpoint @ ' + this.restaurantServiceEndpoint);
+    return this.http.post<Restaurant>(this.restaurantServiceEndpoint, restaurant, this.httpOptions)
+      .pipe(
+        catchError(this.errorService.handleError('addRestaurant', restaurant)));
+    
   }
 
   getRestaurantsFake(): Restaurant[] {
@@ -53,7 +54,7 @@ export class RestaurantService {
     return restaurants;
   }
 
-  private getEnv() {
+  private setupEnv() {
     if (environment.environment == 'dev' && !environment.mock) {
       console.log('Reading configuration from environment.ts ...')
       this.restaurantServiceBaseUrl = environment.restaurantServiceBaseUrl
@@ -62,6 +63,7 @@ export class RestaurantService {
       this.restaurantServiceBaseUrl = this.appConfigService.getConfig().RESTAURANT_SVC_BASEURL
     }
     console.log('restaurantServiceBaseUrl =  ' + this.restaurantServiceBaseUrl);
+    this.restaurantServiceEndpoint = this.restaurantServiceBaseUrl + '/restaurants';
   }
   
 }
