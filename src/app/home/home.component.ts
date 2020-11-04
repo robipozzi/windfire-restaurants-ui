@@ -12,4 +12,8 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
   }
 
+  add(): void {
+    console.log("######## ADD");
+  }
+
 }

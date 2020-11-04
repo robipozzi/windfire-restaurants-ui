@@ -7,12 +7,14 @@ import { FooterComponent } from './footer/footer.component';
 import { LayoutComponent } from './layout/layout.component';
 import { AppRoutingModule } from './app-routing.module';
 import { RestaurantComponent } from './restaurant/restaurant.component';
+import { RestaurantAddComponent } from './restaurant/add/restaurant-add.component';
 import { ErrorComponent } from './error/error.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AppConfigService } from './app-config.service';
 // Import the module for Auth0 integration from the SDK
 import { AuthModule } from '@auth0/auth0-angular';
 import { LoginButtonComponent } from './components/login-button/login-button.component';
+import { FormsModule } from '@angular/forms';
 
 const appInitializerFn = (appConfig: AppConfigService) => {
   return () => {
@@ -29,7 +31,8 @@ const appInitializerFn = (appConfig: AppConfigService) => {
     LayoutComponent,
     RestaurantComponent,
     ErrorComponent,
-    LoginButtonComponent
+    LoginButtonComponent,
+    RestaurantAddComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +42,8 @@ const appInitializerFn = (appConfig: AppConfigService) => {
     AuthModule.forRoot({
       "domain": "robipozzi.eu.auth0.com",
       "clientId": "Gh3X311uWdYBG0xmUcmzB8vsPito52iw"
-    })
+    }),
+    FormsModule
   ],
   providers: [
     AppConfigService,
