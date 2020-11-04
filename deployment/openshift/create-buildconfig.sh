@@ -7,6 +7,7 @@ RUN_FUNCTION=
 # ***** START - Function section
 createBuildConfig()
 {
+    oc new-project $OPENSHIFT_PROJECT
     oc project $OPENSHIFT_PROJECT
     oc create -f $PWD/buildconfig.yaml
     oc set triggers bc/$OPENSHIFT_JENKINS_BUILDCONFIG --from-github
