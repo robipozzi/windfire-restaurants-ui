@@ -38,7 +38,13 @@ export class RestaurantService {
     return this.http.post<Restaurant>(this.restaurantServiceEndpoint, restaurant, this.httpOptions)
       .pipe(
         catchError(this.errorService.handleError('addRestaurant', restaurant)));
-    
+  }
+
+  deleteRestaurant(id: string): Observable<{}> {
+    const url = `${this.restaurantServiceEndpoint}/${id}`;
+    return this.http.delete(url, this.httpOptions)
+      .pipe(
+        catchError(this.errorService.handleError('deleteRestaurant', id)));
   }
 
   getRestaurantsFake(): Restaurant[] {

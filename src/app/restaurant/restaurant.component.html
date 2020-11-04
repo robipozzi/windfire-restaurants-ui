@@ -1,6 +1,6 @@
 <div class="container" *ngIf="restaurants.length">
-    <!--button type="submit" class="btn btn-success" (click)="addNewRestaurant()">Add New Restaurant</button>
-    <div *ngIf="add">
+    <!--button type="submit" class="btn btn-success" (click)="add()">Add New Restaurant</button>
+    <div *ngIf="addFormView">
         <app-restaurant-add></app-restaurant-add>
     </div-->
     <div class="bg-primary text-center text-white font-weight-bold">Restaurants</div>
@@ -11,6 +11,7 @@
                 <th scope="col">Name</th>
                 <th scope="col">Address</th>
                 <th scope="col">Type of cuisine</th>
+                <th scope="col"></th>
             </tr>
         </thead>
         <tbody>
@@ -19,6 +20,7 @@
                 <td>{{restaurant.name}}</td>
                 <td>{{restaurant.street}}, {{restaurant.zipcode}} {{restaurant.city}}</td>
                 <td>{{restaurant.cuisine}}</td>
+                <td><button class="btn btn-primary" (click)="delete(restaurant)">Delete</button></td>
             </tr>
         </tbody>
     </table>

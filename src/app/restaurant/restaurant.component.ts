@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Restaurant } from './model/restaurant';
 import { RestaurantService } from './services/restaurant.service';
 import { environment } from 'src/environments/environment';
+import { ErrorService } from '../error/services/error.service';
 
 @Component({
   selector: 'app-restaurant',
@@ -10,17 +11,23 @@ import { environment } from 'src/environments/environment';
 })
 export class RestaurantComponent implements OnInit {
   public restaurants: Restaurant[] = [];
+  addFormView = false;
 
-  constructor(private restaurantService: RestaurantService) { }
+  constructor(private restaurantService: RestaurantService, private errorService: ErrorService) { }
 
   ngOnInit() {
+    this.errorService.clear();
     this.getRestaurants();
   }
 
-  add = false;
+  add(): void {
+    this.addFormView = true;
+  }
 
-  addNewRestaurant(): void {
-    this.add = true;
+  delete(restaurant: Restaurant): void {
+    this.addFormView = false;
+    this.removeFromRestaurantsArray(restaurant.id);
+    this.restaurantService.deleteRestaurant(restaurant.id).subscribe();
   }
 
   getRestaurants(): void {
@@ -29,6 +36,10 @@ export class RestaurantComponent implements OnInit {
     } else {
       this.restaurantService.getRestaurants().subscribe(obj => this.processResponse(obj));
     }
+  }
+
+  private removeFromRestaurantsArray(id){
+    this.restaurants = this.restaurants.filter(item => item.id !== id);
   }
 
   processResponse(obj: string): void {
