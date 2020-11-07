@@ -4,8 +4,9 @@
 export const environment = {
   production: false,
   environment: 'dev',
-  mock: false,
-  restaurantServiceBaseUrl: 'http://localhost:8082'
+  mock: false
+  // This strategy for environment configuration is currently **** NOT USED ****
+  //restaurantServiceBaseUrl: window["env"]["restaurantServiceBaseUrl"] || "http://localhost:8082"
 };
 
 /*

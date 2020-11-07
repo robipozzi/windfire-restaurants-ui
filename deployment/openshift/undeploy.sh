@@ -9,6 +9,7 @@ undeploy()
 {
     oc project $OPENSHIFT_PROJECT
     oc delete all -l app=$OPENSHIFT_APP_LABEL
+    oc delete configmap $OPENSHIFT_APP_LABEL-config
 }
 # ***** END - Function section
 
