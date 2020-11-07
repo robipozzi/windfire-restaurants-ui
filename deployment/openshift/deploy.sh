@@ -7,9 +7,12 @@ RUN_FUNCTION=
 # ***** START - Function section
 deploy()
 {
+    echo $PWD
     oc new-project $OPENSHIFT_PROJECT
     oc project $OPENSHIFT_PROJECT
-    oc new-app --name $OPENSHIFT_APP_LABEL docker.io/robipozzi/windfire-restaurants-ui:1.0
+    oc new-app --name $OPENSHIFT_APP_LABEL docker.io/robipozzi/windfire-restaurants-ui:1.0 -e RESTAURANT_SVC_BASEURL=http://openshift:8384
+    oc create configmap $OPENSHIFT_APP_LABEL-config --from-file=$PWD/deployment/openshift/config/config.json
+    oc set volume dc/$OPENSHIFT_APP_LABEL --name $OPENSHIFT_APP_LABEL-volume --add --type=configmap --configmap-name=$OPENSHIFT_APP_LABEL-config --mount-path=/usr/share/nginx/html/assets/config --overwrite
     oc expose svc $OPENSHIFT_APP_LABEL
     oc patch route $OPENSHIFT_APP_LABEL --type=json -p '[{"op": "replace", "path": "/spec/port/targetPort", "value":8080-tcp}]'
     ROUTE_URL=$(oc get route windfire-restaurants-ui -o jsonpath='{.spec.host}')

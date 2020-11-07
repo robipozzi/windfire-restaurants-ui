@@ -61,13 +61,7 @@ export class RestaurantService {
   }
 
   private setupEnv() {
-    if (environment.environment == 'dev' && !environment.mock) {
-      console.log('Reading configuration from environment.ts ...')
-      this.restaurantServiceBaseUrl = environment.restaurantServiceBaseUrl
-    } else if (!environment.mock){
-      console.log('Reading configuration from assets/config/config.json file ...')
-      this.restaurantServiceBaseUrl = this.appConfigService.getConfig().RESTAURANT_SVC_BASEURL
-    }
+    this.restaurantServiceBaseUrl = this.appConfigService.getConfig().RESTAURANT_SVC_BASEURL
     console.log('restaurantServiceBaseUrl =  ' + this.restaurantServiceBaseUrl);
     this.restaurantServiceEndpoint = this.restaurantServiceBaseUrl + '/restaurants';
   }
