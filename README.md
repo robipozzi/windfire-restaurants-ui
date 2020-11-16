@@ -1,4 +1,18 @@
 # Windfire Restaurants UI
+- [Overview](#overview)
+- [Before you start](#before-you-start)
+- [Run microservice on local](#run-the-application-on-local)
+- [DevOps automation](#devops-automation)
+  - [Raspberry deployment architecture](#raspberry-deployment-architecture)
+  - [AWS architecture](#aws-architecture)
+    - [How deployment automation procedure works](#how-deployment-automation-procedure-works)
+    - [Ansible dynamic configuration](#ansible-dynamic-configuration)
+    - [Angular dynamic configuration](#angular-dynamic-configuration)
+  - [OpenShift architecture](#openshift-architecture)
+    - [Jenkins pipeline](#jenkins-pipeline)
+- [References](#references)
+
+## Overview
 This repository holds the code for UI of my *Windfire Restaurants* management application, along with scripts, playbooks and configurations to automate application run and deployment to target infrastructures.
 
 ## Before you start
