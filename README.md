@@ -1,7 +1,7 @@
 # Windfire Restaurants UI
 - [Overview](#overview)
 - [Before you start](#before-you-start)
-- [Run microservice on local](#run-the-application-on-local)
+- [Run the application on local](#run-the-application-on-local)
 - [DevOps automation](#devops-automation)
   - [Raspberry deployment architecture](#raspberry-deployment-architecture)
   - [AWS architecture](#aws-architecture)
@@ -74,7 +74,7 @@ Windfire Restaurant UI microservice is deployed to an EC2 instance running Apach
 
 For security reasons, either the Frontend and Backend subnets are not directly accessible via SSH. Ansible automation script is configured to connect to the target hosts via a Bastion Host, conveniently placed in the Management subnet.
 
-#### How deployment automation procedure works
+#### *How deployment automation procedure works*
 In case of deployment to AWS, the **deploy.sh** script needs to account for the dynamic nature of Cloud architecture; it wraps Ansible to automate deployment tasks, passing [windfire.aws_ec2.yaml](deployment/aws/windfire.aws_ec2.yaml) file as a parameter, which instructs Ansible to get Host IPs from a dynamic inventory, when invoking the Ansible provided playbook [deployment/aws/deploy.yaml](deployment/aws/deploy.yaml).
 
 The **deploy.sh** script uses 2 other scripts to generate configurations on the fly, based on the dynamic values of the provisioned AWS architecture:
@@ -107,7 +107,7 @@ In case of deployment to OpenShift, **deploy.sh** delegates to [deployment/opens
 * *Service* of type ClusterIP that exposes required ports and allows to interact with the running pods from within the OpenShift cluster
 * *Route* that exposes the Service outside the OpenShift cluster
 
-#### Jenkins pipeline
+#### *Jenkins pipeline*
 A BuildConfig definition of type JenkinsPipeline is also available at [deployment/openshift/buildconfig.yaml](deployment/openshift/buildconfig.yaml) to allow using Jenkins to automate build and deployment to OpenShift; the BuildConfig then delegates the build and deployment steps to [Jenkinsfile](Jenkinsfile)
 
 [TODO]
