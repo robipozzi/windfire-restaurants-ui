@@ -3,14 +3,6 @@ pipeline {
         // set a timeout of 60 minutes for this pipeline
         timeout(time: 60, unit: 'MINUTES')
     }
-    
-    //agent any
-
-    agent {
-      node {
-        label 'maven'
-      }
-    }
 
     environment {
         WORKDIR = "../.."
@@ -30,9 +22,20 @@ pipeline {
         SLACK_CHANNEL = "windfire-restaurants"
         def dockerImage = ""
     }
+    
+    agent any
+
+    /*agent {
+      node {
+        label 'maven'
+      }
+    }*/
 
     stages {
         stage('Docker Build') {
+            agent {
+                docker { image "${PIPELINE_IMAGE}" }
+            }
             steps {
                 echo "### Running container image build stage ..."
                 script {
