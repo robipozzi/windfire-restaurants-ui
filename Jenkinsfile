@@ -36,12 +36,13 @@ pipeline {
             steps {
                 echo "### Running Docker Build stage ..."
                 script {
-                    dockerImage = docker.build("${DOCKER_IMAGE}:${DOCKER_TAG}","-f Dockerfile .")
+                    sh 'podman'
+                    //dockerImage = docker.build("${DOCKER_IMAGE}:${DOCKER_TAG}","-f Dockerfile .")
                 }
                 echo "### Docker build stage done"
             }
         }
-        stage('Docker Push') {
+        /*stage('Docker Push') {
             steps {
                 echo "### Running Docker Push stage ..."
                 echo "Pushing image ${DOCKER_IMAGE}:${DOCKER_TAG} to Docker Hub"
@@ -52,7 +53,7 @@ pipeline {
                 }
                 echo "### Docker Push stage done"
             }
-        }
+        }*/
         /*stage('Deploy to DEV environment') {
             steps {
                 echo '###### Deploy to DEV environment ######'
