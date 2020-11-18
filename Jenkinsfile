@@ -8,7 +8,7 @@ pipeline {
 
     agent {
       node {
-        label 'base'
+        label 'maven'
       }
     }
 
@@ -34,12 +34,12 @@ pipeline {
     stages {
         stage('Docker Build') {
             steps {
-                echo "### Running Docker Build stage ..."
+                echo "### Running container image build stage ..."
                 script {
-                    sh 'podman'
+                    sh 'podman build -t ${DOCKER_IMAGE}:${DOCKER_TAG} .'
                     //dockerImage = docker.build("${DOCKER_IMAGE}:${DOCKER_TAG}","-f Dockerfile .")
                 }
-                echo "### Docker build stage done"
+                echo "### Container image build stage done"
             }
         }
         /*stage('Docker Push') {
