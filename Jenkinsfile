@@ -4,13 +4,13 @@ pipeline {
         timeout(time: 60, unit: 'MINUTES')
     }
     
-    agent any
+    //agent any
 
-    /*agent {
+    agent {
       node {
-        label 'nodejs'
+        label 'base'
       }
-    }*/
+    }
 
     environment {
         WORKDIR = "../.."
