@@ -11,12 +11,10 @@ pipeline {
         STAGE_PROJECT = "windfire-stage"
         PROD_PROJECT = "windfire-prod"
         APP_GIT_URL = "https://github.com/robipozzi/windfire-restaurants-ui/"
-        
         DOCKER_HUB_CREDENTIALS = "hub-docker"
         DOCKER_HUB_REPOSITORY = "robipozzi"
         //DOCKER_HUB_REPOSITORY = "${env.DOCKER_HUB_REPOSITORY}"
         DOCKER_IMAGE = "${DOCKER_HUB_REPOSITORY}/${APP_NAME}"
-        //DOCKER_TAG = "1.0"
         DOCKER_TAG = "${env.BUILD_ID}"
         PIPELINE_IMAGE = "robipozzi/cmdlines"
         SLACK_CHANNEL = "windfire-restaurants"
@@ -38,26 +36,30 @@ pipeline {
             }*/
             steps {
                 echo "### Running container image build stage ..."
-                echo "### Build " + DOCKER_IMAGE + ":" + DOCKER_TAG + " ..."
+                echo "### Build " + DOCKER_IMAGE + ":" + DOCKER_TAG + " image ..."
                 script {
-                    sh 'podman build -t ${DOCKER_IMAGE}:${DOCKER_TAG} .'
-                    //dockerImage = docker.build("${DOCKER_IMAGE}:${DOCKER_TAG}","-f Dockerfile .")
+                    //sh 'podman build -t ${DOCKER_IMAGE}:${DOCKER_TAG} .'
+                    sh """
+                    #!/bin/bash
+                    # Construct Image Name
+                    echo podman build -t ${DOCKER_IMAGE}:${DOCKER_TAG} .
+                    """
                 }
                 echo "### Container image build stage done"
             }
         }
-        /*stage('Container image push') {
+        stage('Container image push') {
             steps {
-                echo "### Running Docker Push stage ..."
-                echo "Pushing image ${DOCKER_IMAGE}:${DOCKER_TAG} to Docker Hub"
-                script {
-                    docker.withRegistry('', "${DOCKER_HUB_CREDENTIALS}") {
-                        dockerImage.push()
-                    }
-                }
-                echo "### Docker Push stage done"
+                echo "### Running container image push stage ..."
+                echo "Pushing ${DOCKER_IMAGE}:${DOCKER_TAG} image to Docker Hub"
+                sh """
+                    #!/bin/bash
+                    echo podman login -u ${USERNAME} -p ${PASSWORD} ${REGISTRY} --tls-verify=false
+                    echo podman push ${DOCKER_IMAGE}:${DOCKER_TAG} --tls-verify=false
+                    """
+                echo "### Container image push stage done"
             }
-        }*/
+        }
         /*stage('Deploy to DEV environment') {
             steps {
                 echo '###### Deploy to DEV environment ######'
