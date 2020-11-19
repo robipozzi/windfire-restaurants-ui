@@ -31,7 +31,7 @@ pipeline {
                                 echo "DeploymentConfig " + APP_NAME + " exists, rollout to update app ..."
                                 // Rollout (it corresponds to oc rollout <deploymentconfig>)
                                 def dc = openshift.selector("dc", "${APP_NAME}")
-                                // dc.startBuild()
+                                dc.rollout().latest()
                                 // If a Route does not exist, expose the Service and create the Route
                                 if (!openshift.selector("route", APP_NAME).exists()) {
                                     echo "Route " + APP_NAME + " does not exist, exposing service ..." 
