@@ -17,7 +17,7 @@
 
         // Pod Template
         def podLabel = "web"
-        def cloud = "kubernetes"
+        //def cloud = "kubernetes"
         def registryCredsID = "registry-credentials-id"
         def serviceAccount = "jenkins"
 
