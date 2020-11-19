@@ -15,13 +15,79 @@ pipeline {
         DOCKER_HUB_REPOSITORY = "robipozzi"
         //DOCKER_HUB_REPOSITORY = "${env.DOCKER_HUB_REPOSITORY}"
         DOCKER_IMAGE = "${DOCKER_HUB_REPOSITORY}/${APP_NAME}"
-        DOCKER_TAG = "${env.BUILD_ID}"
+        DOCKER_TAG = "1.0"
+        //DOCKER_TAG = "${env.BUILD_ID}"
         PIPELINE_IMAGE = "robipozzi/cmdlines"
         SLACK_CHANNEL = "windfire-restaurants"
         def dockerImage = ""
     }
+
+    // Pod Template
+    def podLabel = "web"
+    def cloud = env.CLOUD ?: "kubernetes"
+    def registryCredsID = env.REGISTRY_CREDENTIALS ?: "registry-credentials-id"
+    def serviceAccount = env.SERVICE_ACCOUNT ?: "jenkins"
+
+    // Pod Environment Variables
+    def namespace = env.NAMESPACE ?: "windfire"
+    def registry = env.REGISTRY ?: "docker.io"
+    def imageName = env.IMAGE_NAME ?: "ibmcase/bluecompute-web"
+
+    /*
+    Optional Pod Environment Variables
+    */
+    def helmHome = env.HELM_HOME ?: env.JENKINS_HOME + "/.helm"
+
+    podTemplate(label: podLabel, cloud: cloud, serviceAccount: serviceAccount, envVars: [
+            envVar(key: 'NAMESPACE', value: namespace),
+            envVar(key: 'REGISTRY', value: registry),
+            envVar(key: 'IMAGE_NAME', value: imageName)
+        ],
+        containers: [
+            containerTemplate(name: 'podman', image: 'robipozzi/podman:1.0', ttyEnabled: true, command: 'cat', privileged: true)
+    ]) {
+
+        node(podLabel) {
+            
+
+            // Docker
+            container(name:'podman', shell:'/bin/bash') {
+                stage('Container image build') {
+                    /*agent {
+                        docker { image "${PIPELINE_IMAGE}" }
+                    }*/
+                    steps {
+                        echo "### Running container image build stage ..."
+                        echo "### Build " + DOCKER_IMAGE + ":" + DOCKER_TAG + " image ..."
+                        script {
+                            //sh 'podman build -t ${DOCKER_IMAGE}:${DOCKER_TAG} .'
+                            sh """
+                            #!/bin/bash
+                            # Construct Image Name
+                            echo podman build -t ${DOCKER_IMAGE}:${DOCKER_TAG} .
+                            """
+                        }
+                        echo "### Container image build stage done"
+                    }
+                }
+                stage('Container image push') {
+                    steps {
+                        echo "### Running container image push stage ..."
+                        echo "Pushing ${DOCKER_IMAGE}:${DOCKER_TAG} image to Docker Hub"
+                        //echo podman login -u ${USERNAME} -p ${PASSWORD} ${REGISTRY} --tls-verify=false
+                        sh """
+                            #!/bin/bash
+                            echo podman push ${DOCKER_IMAGE}:${DOCKER_TAG} --tls-verify=false
+                            """
+                        echo "### Container image push stage done"
+                    }
+                }
+            }
+        }
+    }
+
     
-    agent any
+    //agent any
 
     /*agent {
       node {
@@ -29,7 +95,7 @@ pipeline {
       }
     }*/
 
-    stages {
+    /*stages {
         stage('Container image build') {
             /*agent {
                 docker { image "${PIPELINE_IMAGE}" }
@@ -52,9 +118,9 @@ pipeline {
             steps {
                 echo "### Running container image push stage ..."
                 echo "Pushing ${DOCKER_IMAGE}:${DOCKER_TAG} image to Docker Hub"
+                //echo podman login -u ${USERNAME} -p ${PASSWORD} ${REGISTRY} --tls-verify=false
                 sh """
                     #!/bin/bash
-                    echo podman login -u ${USERNAME} -p ${PASSWORD} ${REGISTRY} --tls-verify=false
                     echo podman push ${DOCKER_IMAGE}:${DOCKER_TAG} --tls-verify=false
                     """
                 echo "### Container image push stage done"
@@ -92,6 +158,6 @@ pipeline {
                     }
                 }
             }
-        }*/
-    }
+        }
+    }*/
 }
