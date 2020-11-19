@@ -16,8 +16,8 @@ pipeline {
         DOCKER_HUB_REPOSITORY = "robipozzi"
         //DOCKER_HUB_REPOSITORY = "${env.DOCKER_HUB_REPOSITORY}"
         DOCKER_IMAGE = "${DOCKER_HUB_REPOSITORY}/${APP_NAME}"
-        DOCKER_TAG = "1.0"
-        //DOCKER_TAG = "${env.BUILD_ID}"
+        //DOCKER_TAG = "1.0"
+        DOCKER_TAG = "${env.BUILD_ID}"
         PIPELINE_IMAGE = "robipozzi/cmdlines"
         SLACK_CHANNEL = "windfire-restaurants"
         def dockerImage = ""
@@ -32,12 +32,13 @@ pipeline {
     }*/
 
     stages {
-        stage('Docker Build') {
-            agent {
+        stage('Container image build') {
+            /*agent {
                 docker { image "${PIPELINE_IMAGE}" }
-            }
+            }*/
             steps {
                 echo "### Running container image build stage ..."
+                echo "### Build " + DOCKER_IMAGE + ":" + DOCKER_TAG + " ..."
                 script {
                     sh 'podman build -t ${DOCKER_IMAGE}:${DOCKER_TAG} .'
                     //dockerImage = docker.build("${DOCKER_IMAGE}:${DOCKER_TAG}","-f Dockerfile .")
@@ -45,7 +46,7 @@ pipeline {
                 echo "### Container image build stage done"
             }
         }
-        /*stage('Docker Push') {
+        /*stage('Container image push') {
             steps {
                 echo "### Running Docker Push stage ..."
                 echo "Pushing image ${DOCKER_IMAGE}:${DOCKER_TAG} to Docker Hub"
