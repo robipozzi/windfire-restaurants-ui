@@ -1,35 +1,34 @@
+def WORKDIR = "../.."
+def APP_NAME = "windfire-restaurants-ui"
+def DEV_PROJECT = "windfire"
+def STAGE_PROJECT = "windfire-stage"
+def PROD_PROJECT = "windfire-prod"
+def APP_GIT_URL = "https://github.com/robipozzi/windfire-restaurants-ui/"
+def DOCKER_HUB_CREDENTIALS = "hub-docker"
+def DOCKER_HUB_REPOSITORY = "robipozzi"
+//DOCKER_HUB_REPOSITORY = "${env.DOCKER_HUB_REPOSITORY}"
+def DOCKER_IMAGE = "${DOCKER_HUB_REPOSITORY}/${APP_NAME}"
+def DOCKER_TAG = "1.0"
+//DOCKER_TAG = "${env.BUILD_ID}"
+def PIPELINE_IMAGE = "robipozzi/cmdlines"
+def SLACK_CHANNEL = "windfire-restaurants"
+def dockerImage = ""
 
-        def WORKDIR = "../.."
-        def APP_NAME = "windfire-restaurants-ui"
-        def DEV_PROJECT = "windfire"
-        def STAGE_PROJECT = "windfire-stage"
-        def PROD_PROJECT = "windfire-prod"
-        def APP_GIT_URL = "https://github.com/robipozzi/windfire-restaurants-ui/"
-        def DOCKER_HUB_CREDENTIALS = "hub-docker"
-        def DOCKER_HUB_REPOSITORY = "robipozzi"
-        //DOCKER_HUB_REPOSITORY = "${env.DOCKER_HUB_REPOSITORY}"
-        def DOCKER_IMAGE = "${DOCKER_HUB_REPOSITORY}/${APP_NAME}"
-        def DOCKER_TAG = "1.0"
-        //DOCKER_TAG = "${env.BUILD_ID}"
-        def PIPELINE_IMAGE = "robipozzi/cmdlines"
-        def SLACK_CHANNEL = "windfire-restaurants"
-        def dockerImage = ""
+// Pod Template
+def podLabel = "web"
+//def cloud = "kubernetes"
+def registryCredsID = "registry-credentials-id"
+def serviceAccount = "jenkins"
 
-        // Pod Template
-        def podLabel = "web"
-        //def cloud = "kubernetes"
-        def registryCredsID = "registry-credentials-id"
-        def serviceAccount = "jenkins"
+// Pod Environment Variables
+def namespace = "windfire"
+def registry = "docker.io"
+def imageName = "ibmcase/bluecompute-web"
 
-        // Pod Environment Variables
-        def namespace = "windfire"
-        def registry = "docker.io"
-        def imageName = "ibmcase/bluecompute-web"
-
-        /*
-        Optional Pod Environment Variables
-        */
-        //def helmHome = env.HELM_HOME ?: env.JENKINS_HOME + "/.helm"
+/*
+Optional Pod Environment Variables
+*/
+//def helmHome = env.HELM_HOME ?: env.JENKINS_HOME + "/.helm"
 
     podTemplate(label: podLabel, envVars: [
             envVar(key: 'NAMESPACE', value: namespace),
