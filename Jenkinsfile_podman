@@ -1,3 +1,5 @@
+// https://github.com/ibm-cloud-architecture/refarch-cloudnative-devops-kubernetes/blob/master/docs/podman.md#the-podman-approach
+// https://www.jenkins.io/doc/book/pipeline/
 def WORKDIR = "../.."
 def APP_NAME = "windfire-restaurants-ui"
 def DEV_PROJECT = "windfire"

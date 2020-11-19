@@ -26,12 +26,12 @@ pipeline {
                     openshift.withCluster() {
                         openshift.withProject("$DEV_PROJECT") {
                             echo "Using project: ${openshift.project()}"
-                            // If BuildConfig already exists, start a new build to update the application
-                            if (openshift.selector("bc", APP_NAME).exists()) {
-                                echo "BuildConfig " + APP_NAME + " exists, start new build to update app ..."
-                                // Start new build (it corresponds to oc start-build <buildconfig>)
-                                def bc = openshift.selector("bc", "${APP_NAME}")
-                                bc.startBuild()
+                            // If DeploymentConfig already exists, rollout to update the application
+                            if (openshift.selector("dc", APP_NAME).exists()) {
+                                echo "DeploymentConfig " + APP_NAME + " exists, rollout to update app ..."
+                                // Rollout (it corresponds to oc rollout <deploymentconfig>)
+                                def dc = openshift.selector("dc", "${APP_NAME}")
+                                // dc.startBuild()
                                 // If a Route does not exist, expose the Service and create the Route
                                 if (!openshift.selector("route", APP_NAME).exists()) {
                                     echo "Route " + APP_NAME + " does not exist, exposing service ..." 
@@ -39,9 +39,9 @@ pipeline {
                                     service.expose()
                                 }
                             } 
-                            // If BuildConfig does not exist, deploy a new application using an OpenShift Template
+                            // If DeploymentConfig does not exist, deploy a new application using an OpenShift Template
                             else{
-                                echo "BuildConfig " + APP_NAME + " does not exist, creating app ..."
+                                echo "DeploymentConfig " + APP_NAME + " does not exist, creating app ..."
                                 openshift.newApp('deployment/openshift/windfire-restaurants-ui-template.yaml')
                             }
                             def route = openshift.selector("route", APP_NAME)
