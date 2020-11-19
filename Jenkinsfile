@@ -23,19 +23,19 @@ pipeline {
 
         // Pod Template
         def podLabel = "web"
-        def cloud = env.CLOUD ?: "kubernetes"
-        def registryCredsID = env.REGISTRY_CREDENTIALS ?: "registry-credentials-id"
-        def serviceAccount = env.SERVICE_ACCOUNT ?: "jenkins"
+        def cloud = "kubernetes"
+        def registryCredsID = "registry-credentials-id"
+        def serviceAccount = "jenkins"
 
         // Pod Environment Variables
-        def namespace = env.NAMESPACE ?: "windfire"
-        def registry = env.REGISTRY ?: "docker.io"
-        def imageName = env.IMAGE_NAME ?: "ibmcase/bluecompute-web"
+        def namespace = "windfire"
+        def registry = "docker.io"
+        def imageName = "ibmcase/bluecompute-web"
 
         /*
         Optional Pod Environment Variables
         */
-        def helmHome = env.HELM_HOME ?: env.JENKINS_HOME + "/.helm"
+        //def helmHome = env.HELM_HOME ?: env.JENKINS_HOME + "/.helm"
     }
 
     podTemplate(label: podLabel, cloud: cloud, serviceAccount: serviceAccount, envVars: [
