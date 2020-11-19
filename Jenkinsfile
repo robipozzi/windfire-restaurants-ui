@@ -30,7 +30,6 @@
         Optional Pod Environment Variables
         */
         //def helmHome = env.HELM_HOME ?: env.JENKINS_HOME + "/.helm"
-    }
 
     podTemplate(label: podLabel, cloud: cloud, serviceAccount: serviceAccount, envVars: [
             envVar(key: 'NAMESPACE', value: namespace),
