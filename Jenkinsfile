@@ -31,7 +31,7 @@
         */
         //def helmHome = env.HELM_HOME ?: env.JENKINS_HOME + "/.helm"
 
-    podTemplate(label: podLabel, cloud: cloud, serviceAccount: serviceAccount, envVars: [
+    podTemplate(label: podLabel, envVars: [
             envVar(key: 'NAMESPACE', value: namespace),
             envVar(key: 'REGISTRY', value: registry),
             envVar(key: 'IMAGE_NAME', value: imageName)
