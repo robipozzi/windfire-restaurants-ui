@@ -48,8 +48,6 @@ pipeline {
     ]) {
 
         node(podLabel) {
-            
-
             // Docker
             container(name:'podman', shell:'/bin/bash') {
                 stage('Container image build') {
@@ -97,9 +95,6 @@ pipeline {
 
     /*stages {
         stage('Container image build') {
-            /*agent {
-                docker { image "${PIPELINE_IMAGE}" }
-            }*/
             steps {
                 echo "### Running container image build stage ..."
                 echo "### Build " + DOCKER_IMAGE + ":" + DOCKER_TAG + " image ..."
@@ -126,7 +121,7 @@ pipeline {
                 echo "### Container image push stage done"
             }
         }
-        /*stage('Deploy to DEV environment') {
+        stage('Deploy to DEV environment') {
             steps {
                 echo '###### Deploy to DEV environment ######'
                 script {
