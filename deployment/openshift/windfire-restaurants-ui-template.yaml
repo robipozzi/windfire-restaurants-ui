@@ -31,6 +31,7 @@ objects:
         containers:
         - name: windfire-restaurants-ui
           image: docker.io/robipozzi/windfire-restaurants-ui:1.0
+          imagePullPolicy: Always
           livenessProbe:
             httpGet:
               path: /
