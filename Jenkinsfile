@@ -20,23 +20,23 @@ pipeline {
         PIPELINE_IMAGE = "robipozzi/cmdlines"
         SLACK_CHANNEL = "windfire-restaurants"
         def dockerImage = ""
+
+        // Pod Template
+        def podLabel = "web"
+        def cloud = env.CLOUD ?: "kubernetes"
+        def registryCredsID = env.REGISTRY_CREDENTIALS ?: "registry-credentials-id"
+        def serviceAccount = env.SERVICE_ACCOUNT ?: "jenkins"
+
+        // Pod Environment Variables
+        def namespace = env.NAMESPACE ?: "windfire"
+        def registry = env.REGISTRY ?: "docker.io"
+        def imageName = env.IMAGE_NAME ?: "ibmcase/bluecompute-web"
+
+        /*
+        Optional Pod Environment Variables
+        */
+        def helmHome = env.HELM_HOME ?: env.JENKINS_HOME + "/.helm"
     }
-
-    // Pod Template
-    def podLabel = "web"
-    def cloud = env.CLOUD ?: "kubernetes"
-    def registryCredsID = env.REGISTRY_CREDENTIALS ?: "registry-credentials-id"
-    def serviceAccount = env.SERVICE_ACCOUNT ?: "jenkins"
-
-    // Pod Environment Variables
-    def namespace = env.NAMESPACE ?: "windfire"
-    def registry = env.REGISTRY ?: "docker.io"
-    def imageName = env.IMAGE_NAME ?: "ibmcase/bluecompute-web"
-
-    /*
-    Optional Pod Environment Variables
-    */
-    def helmHome = env.HELM_HOME ?: env.JENKINS_HOME + "/.helm"
 
     podTemplate(label: podLabel, cloud: cloud, serviceAccount: serviceAccount, envVars: [
             envVar(key: 'NAMESPACE', value: namespace),
