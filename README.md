@@ -110,6 +110,9 @@ In case of deployment to OpenShift, **deploy.sh** delegates to [deployment/opens
 #### *Jenkins pipeline*
 A BuildConfig definition of type JenkinsPipeline is also available at [deployment/openshift/buildconfig.yaml](deployment/openshift/buildconfig.yaml) to allow using Jenkins to automate build and deployment to OpenShift; the BuildConfig then delegates the build and deployment steps to [Jenkinsfile](Jenkinsfile)
 
+#### OpenShift pipeline
+An implementation of build and deployment procedure with OpenShift Pipelines (based on Tekton) is ongoing and will be delivered soon.
+
 [TODO]
 
 ## References

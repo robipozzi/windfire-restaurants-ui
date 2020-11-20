@@ -3,12 +3,6 @@ pipeline {
         // set a timeout of 60 minutes for this pipeline
         timeout(time: 60, unit: 'MINUTES')
     }
-    
-    agent {
-      node {
-        label 'nodejs'
-      }
-    }
 
     environment {
         APP_NAME = "windfire-restaurants-ui"
@@ -16,6 +10,12 @@ pipeline {
         STAGE_PROJECT = "windfire-stage"
         PROD_PROJECT = "windfire-prod"
         APP_GIT_URL = "https://github.com/robipozzi/windfire-restaurants-ui/"
+    }
+    
+    agent {
+      node {
+        label 'nodejs'
+      }
     }
 
     stages {
