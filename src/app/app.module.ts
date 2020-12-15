@@ -15,6 +15,10 @@ import { AppConfigService } from './app-config.service';
 import { AuthModule } from '@auth0/auth0-angular';
 import { LoginButtonComponent } from './components/login-button/login-button.component';
 import { FormsModule } from '@angular/forms';
+import { environment as env } from '../environments/environment';
+import { SignupButtonComponent } from './components/signup-button/signup-button.component';
+import { LogoutButtonComponent } from './components/logout-button/logout-button.component';
+import { AuthenticationButtonComponent } from './components/authentication-button/authentication-button.component';
 
 const appInitializerFn = (appConfig: AppConfigService) => {
   return () => {
@@ -32,7 +36,10 @@ const appInitializerFn = (appConfig: AppConfigService) => {
     RestaurantComponent,
     ErrorComponent,
     LoginButtonComponent,
-    RestaurantAddComponent
+    RestaurantAddComponent,
+    SignupButtonComponent,
+    LogoutButtonComponent,
+    AuthenticationButtonComponent
   ],
   imports: [
     BrowserModule,
@@ -40,8 +47,7 @@ const appInitializerFn = (appConfig: AppConfigService) => {
     AppRoutingModule,
     // Import the module for Auth0 integration into the application, with configuration
     AuthModule.forRoot({
-      "domain": "robipozzi.eu.auth0.com",
-      "clientId": "Gh3X311uWdYBG0xmUcmzB8vsPito52iw"
+      ...env.auth
     }),
     FormsModule
   ],
