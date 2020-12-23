@@ -1,9 +1,17 @@
-<div class="container">
+<div class="container" *ngIf="auth.isAuthenticated$ | async">
     <div class="jumbotron">
         <h1 class="display-4 text-center">Welcome at Windfire Restaurants!</h1>
         <hr class="my-4">
         <p class="text-center">Main Functions</p>
         <a class="btn btn-primary btn-lg" routerLink="/restaurants" role="button">My Restaurants List</a>
         <a class="btn btn-primary btn-lg" routerLink="/add" role="button">Add Restaurant</a>
+    </div>
+</div>
+<div class="container" *ngIf="(auth.isAuthenticated$ | async) === false">
+    <div class="jumbotron">
+        <h1 class="display-4 text-center">Welcome at Windfire Restaurants!</h1>
+        <hr class="my-4">
+        <p class="text-center">Please Authenticate</p>
+        <app-authentication-button></app-authentication-button>
     </div>
 </div>

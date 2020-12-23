@@ -8,10 +8,10 @@ import { RestaurantAddComponent } from './restaurant/add/restaurant-add.componen
 import { AuthGuard } from '@auth0/auth0-angular';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent, canActivate: [AuthGuard] },
+  { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
-  { path: 'restaurants', component: RestaurantComponent },
-  { path: 'add', component: RestaurantAddComponent }
+  { path: 'restaurants', component: RestaurantComponent, canActivate: [AuthGuard] },
+  { path: 'add', component: RestaurantAddComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({

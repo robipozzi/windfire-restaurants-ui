@@ -1,7 +1,8 @@
 <nav class="navbar navbar-dark bg-dark mb-5">
     <div class="navbar-expand mr-auto">
         <div class="navbar-nav">
-            <a class="nav-item nav-link active" href="#">Home</a>
+            <a class="nav-item nav-link active" href="/home">Home</a>
+            <app-logout-button *ngIf="auth.isAuthenticated$ | async"></app-logout-button>
         </div>
     </div>
     <div class="navbar-expand ml-auto navbar-nav">

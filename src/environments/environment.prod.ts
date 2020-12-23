@@ -6,7 +6,7 @@ export const environment = {
   auth: {
     domain,
     clientId,
-    redirectUri: window.location.origin,
+    redirectUri: window.location.origin
   }
   // This strategy for environment configuration is currently **** NOT USED ****
   //restaurantServiceBaseUrl: window["env"]["restaurantServiceBaseUrl"] || "http://prod:9988"
