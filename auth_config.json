@@ -1,4 +1,6 @@
 {
     "domain": "robipozzi.eu.auth0.com",
-    "clientId": "Gh3X311uWdYBG0xmUcmzB8vsPito52iw"
+    "clientId": "Gh3X311uWdYBG0xmUcmzB8vsPito52iw",
+    "audience": "windfire-restaurants",
+    "serverUrl": "http://localhost:8082"
 }  

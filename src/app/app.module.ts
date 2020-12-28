@@ -11,8 +11,12 @@ import { RestaurantAddComponent } from './restaurant/add/restaurant-add.componen
 import { ErrorComponent } from './error/error.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AppConfigService } from './app-config.service';
+// ##### Auth0 configuration - START
 // Import the module for Auth0 integration from the SDK
 import { AuthModule } from '@auth0/auth0-angular';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthHttpInterceptor } from '@auth0/auth0-angular';
+// ##### Auth0 configuration - END
 import { LoginButtonComponent } from './components/login-button/login-button.component';
 import { FormsModule } from '@angular/forms';
 import { environment as env } from '../environments/environment';
@@ -47,7 +51,19 @@ const appInitializerFn = (appConfig: AppConfigService) => {
     AppRoutingModule,
     // Import the module for Auth0 integration into the application, with configuration
     AuthModule.forRoot({
-      ...env.auth
+      ...env.auth,
+      httpInterceptor: {
+        allowedList: [
+          {
+            // Match requests
+            uri: 'http://localhost:8082/*',
+            tokenOptions: {
+              // The attached token should target this audience
+              audience: 'windfire-restaurants',
+            }
+          }
+        ]
+      },
     }),
     FormsModule
   ],
@@ -58,6 +74,11 @@ const appInitializerFn = (appConfig: AppConfigService) => {
       useFactory: appInitializerFn,
       multi: true,
       deps: [AppConfigService]
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthHttpInterceptor,
+      multi: true,
     }
   ],
   bootstrap: [AppComponent]
