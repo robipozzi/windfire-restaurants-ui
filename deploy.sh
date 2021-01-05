@@ -133,7 +133,7 @@ setDeployFunction()
             ;;
         4)  DEPLOY_FUNCTION="deployToAWS"
             BUILD_OPTIONS="--prod"
-            BACKEND_INSTANCE_PUBLIC_DNS=$(terraform output -state=../windfire-restaurants-devops/aws/MultiZone/terraform.tfstate alb-public_dns)
+            BACKEND_INSTANCE_PUBLIC_DNS=$(terraform output -state=../windfire-restaurants-devops/aws/MultiZone/terraform.tfstate backend-alb-public_dns)
             ;;
         5)  DEPLOY_FUNCTION="deployToOpenShift"
             BUILD_OPTIONS="--prod"
