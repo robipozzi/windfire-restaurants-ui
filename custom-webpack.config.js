@@ -7,7 +7,8 @@ keys.forEach(key => env[key] = JSON.stringify(process.env[key]));
 module.exports = {
     plugins: [
         new webpack.DefinePlugin({      
-            'ENV_VARS': env    
+            //'ENV_VARS': env
+            "process.env": JSON.stringify(process.env) 
         })
     ]
 }
