@@ -5,9 +5,7 @@ export const environment = {
   mock: false,
   auth: {
     "domain": "robipozzi.eu.auth0.com",
-    "clientId": "IemyApptXPjBFiNXbtLHU5ek3AZR4chx",
-    "audience": "windfire-restaurants",
-    "serverUrl": "http://openshift"
+    "clientId": "IemyApptXPjBFiNXbtLHU5ek3AZR4chx"
   }
   /*auth: {
     domain,
