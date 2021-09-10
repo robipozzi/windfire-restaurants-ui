@@ -3,8 +3,9 @@ export const environment = {
   environment: 'prod',
   mock: false,
   auth: {
-    "domain": "robipozzi.eu.auth0.com",
-    "clientId": "IemyApptXPjBFiNXbtLHU5ek3AZR4chx"
+    domain: "robipozzi.eu.auth0.com",
+    clientId: "IemyApptXPjBFiNXbtLHU5ek3AZR4chx",
+    redirectUri: window.location.origin
   }
   // This strategy for environment configuration is currently **** NOT USED ****
   //restaurantServiceBaseUrl: window["env"]["restaurantServiceBaseUrl"] || "http://prod:9988"
