@@ -13,9 +13,6 @@
         "build": {
           "builder": "@angular-builders/custom-webpack:browser",
           "options": {
-            "customWebpackConfig": {
-              "path": "./custom-webpack.config.js"
-            },
             "outputPath": "dist/windfire-restaurants-ui",
             "index": "src/index.html",
             "main": "src/main.ts",

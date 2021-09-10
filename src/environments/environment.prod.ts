@@ -1,4 +1,3 @@
-//import { domain, clientId, audience } from '../../auth_config.json';
 export const environment = {
   production: true,
   environment: 'prod',
@@ -7,12 +6,6 @@ export const environment = {
     "domain": "robipozzi.eu.auth0.com",
     "clientId": "IemyApptXPjBFiNXbtLHU5ek3AZR4chx"
   }
-  /*auth: {
-    domain,
-    clientId,
-    redirectUri: window.location.origin,
-    audience
-  }*/
   // This strategy for environment configuration is currently **** NOT USED ****
   //restaurantServiceBaseUrl: window["env"]["restaurantServiceBaseUrl"] || "http://prod:9988"
 };
