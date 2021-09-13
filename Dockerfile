@@ -1,4 +1,4 @@
-FROM nginx:1.15.5
+FROM nginx:1.21.3
 LABEL author="Roberto Pozzi"
 ENV APPLICATION_DIR="/usr/share/nginx/html"
 RUN chgrp -R 0 /var/log/nginx /var/run /var/cache && \
