@@ -1,4 +1,4 @@
-source setenv.sh
+source ./setenv.sh
 
 echo ${cyn}Removing $CONTAINER_NAME container ...${end}
 docker rm -f $CONTAINER_NAME

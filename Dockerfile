@@ -1,4 +1,4 @@
-FROM nginx:1.15.5
+FROM nginx:1.23.1
 LABEL author="Roberto Pozzi"
 ENV APPLICATION_DIR="/usr/share/nginx/html"
 RUN chgrp -R 0 /var/log/nginx /var/run /var/cache && \
@@ -13,4 +13,3 @@ RUN rm -rf $APPLICATION_DIR/*
 ## From 'builder' stage copy over the artifacts in dist folder to default nginx public folder
 COPY /dist/windfire-restaurants-ui $APPLICATION_DIR
 CMD ["nginx", "-g", "daemon off;"]
-#CMD ["/bin/sh",  "-c",  "envsubst < /usr/share/nginx/html/assets/config/env.template.js > /usr/share/nginx/html/assets/config/env.js && exec nginx -g 'daemon off;'"]

@@ -1,4 +1,4 @@
-source setenv.sh
+source ./setenv.sh
 
 # ##### START - Variable section
 SCRIPT=undeploy.sh
